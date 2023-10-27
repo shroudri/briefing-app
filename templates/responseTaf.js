@@ -1,6 +1,6 @@
 // https://aviationweather.gov/api/data/taf?ids=LEJR&format=json
 
-export default TAF = [
+const SampleResponseTafs = [
     {
        "tafId":12753926,
        "icaoId":"LEJR",
@@ -117,3 +117,5 @@ export default TAF = [
        ]
     }
  ]
+
+export default SampleResponseTafs

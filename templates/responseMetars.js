@@ -1,6 +1,6 @@
 // https://aviationweather.gov/api/data/metar?ids=LEJR&format=json&hours=6
 
-const JSON_METARS = [
+const SampleResponseMetars = [
     {
        "metar_id":438274397,
        "icaoId":"LEJR",
@@ -507,4 +507,4 @@ const JSON_METARS = [
     }
  ]
 
- export default JSON_METARS
+ export default SampleResponseMetars

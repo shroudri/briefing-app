@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, View, StyleSheet } from "react-native";
-import TAF from "../../templates/presentTaf";
+import SampleResponseTafs from "../../templates/responseTaf";
 
 import theme from "../theme";
 
@@ -9,7 +9,7 @@ const ItemTaf = () => {
         <>
         <View style={styles.container}>
             <Text style={styles.title}>Current TAF</Text>
-            <Text style={styles.paragraph}>{TAF[0].rawTAF}</Text>
+            <Text style={styles.paragraph}>{SampleResponseTafs[0].rawTAF}</Text>
         </View>
         </>
     )
