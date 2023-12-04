@@ -29,7 +29,7 @@ export default function ItemTaf(props) {
       <View style={styles.container}>
           <Text style={styles.title}>Current TAF</Text>
             {loading && <Text>Loading...</Text>}
-            {dataToDisplay && (
+            {data && (
               <FlatList
                 data={data}
                 renderItem={renderItem}

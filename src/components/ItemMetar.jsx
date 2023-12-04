@@ -29,7 +29,7 @@ export default function ItemMetar(props) {
       <View style={styles.container}>
           <Text style={styles.title}>Recent METARs</Text>
             {loading && <Text>Loading...</Text>}
-            {dataToDisplay && (
+            {data && (
               <FlatList
                 data={data}
                 renderItem={renderItem}
