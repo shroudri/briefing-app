@@ -7,9 +7,7 @@ export default function ItemMetar(props) {
   const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
-    const url = `http://aviationweather.gov/api/data/metar?ids=${props.airport}&format=json&hours=6`;
-    console.log(url)
-    const resp = await fetch(url);
+    const resp = await fetch(`http://aviationweather.gov/api/data/metar?ids=${props.airport}&format=json&hours=6`);
     const data = await resp.json();
     setData(data);
     setLoading(false);
