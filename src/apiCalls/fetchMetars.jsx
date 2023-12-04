@@ -1,25 +1,55 @@
 import React, { useState, useEffect } from 'react';
-import { Text } from 'react-native';
-import axios from 'axios';
+import { Text, View, FlatList, StyleSheet } from 'react-native';
+import theme from '../theme';
 
-
-export default function fetchMetars () {
+export default function FetchMetars() {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const fetchData = () => {
-    return axios.get("https://aviationweather.gov/api/data/metar?ids=LEJR&format=json&hours=6")
-      .then((response) => setData(response.data));
-  }
+  const fetchData = async () => {
+    const resp = await fetch("http://aviationweather.gov/api/data/metar?ids=LEJR&format=json&hours=6");
+    const data = await resp.json();
+    setData(data);
+    setLoading(false);
+  };
+
+  const renderItem = ({ item }) => {
+    return (
+      <View>
+        <Text>{item.rawOb}</Text>
+      </View>
+    );
+  };
 
   useEffect(() => {
     fetchData();
-  }, [])
+  }, []);
 
   return (
-    data.map((metar) => (
-      <Text key={metar.metar_id}>{metar.rawOb}</Text>
-    ))
-  );
+      <View style={styles.container}>
+          <Text style={styles.title}>Current METAR</Text>
+            {loading && <Text>Loading...</Text>}
+            {data && (
+              <FlatList
+                data={data}
+                renderItem={renderItem}
+                keyExtractor={(item) => item.metar_id.toString()}
+              />
+            )}
+      </View>
+  )
 }
 
 
+const styles = StyleSheet.create({
+  container: {
+      padding: 10
+  },
+  title: {
+      fontWeight: theme.text.contentTitle.fontWeight,
+      fontSize: theme.text.contentTitle.fontSize
+  },
+  paragraph: {
+      fontSize: theme.text.contentParagraph.fontSize
+  }
+})
