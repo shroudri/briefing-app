@@ -7,23 +7,21 @@ import SampleResponseMetars from "../../templates/responseMetars";
 import fetchMetars from "../apiCalls/fetchMetars";
 
 const ItemMetar = (props) => {
-    const array_metars = SampleResponseMetars
-    const historic_metars = array_metars.slice(1)
+    const metars = SampleResponseMetars;
+    const historicMetars = metars.slice(1);
 
-    if ( props.onlyCurrent === true ){
+    if ( props.onlyCurrent){
         return (
-            <>
             <View style={styles.container}>
                 <Text style={styles.title}>Current METAR</Text>
                 <Text style={styles.paragraph}>{array_metars[0].rawOb}</Text>
             </View>
-            </>
         )
-    } else if ( props.onlyHistoric === true  ) {
+    } else if ( props.onlyHistoric) {
         return (
             <View style={styles.container}>
                 <Text style={styles.title}>Historic METARs</Text>
-                { historic_metars.map((item) => (
+                { historicMetars.map((item) => (
                     <View key={item.metar_id}>
                         <Text>{item.rawOb}</Text>
                     </View>
