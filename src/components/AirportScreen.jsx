@@ -11,7 +11,7 @@ const AirportScreen = () => {
     return (
         <View>
             <AppSubHeader title={ICAO} />
-            <ItemMetar />
+            <ItemMetar onlyCurrent />
             <ItemTaf />
             <ItemMetar onlyHistoric />
         </View>

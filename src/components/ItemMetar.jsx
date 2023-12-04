@@ -1,40 +1,34 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet } from "react-native";
-import SampleResponseMetars from "../../templates/responseMetars";
+import axios from 'axios';
+import theme from '../theme'
 
-import theme from "../theme";
+import SampleResponseMetars from "../../templates/responseMetars";
+import fetchMetars from "../apiCalls/fetchMetars";
 
 const ItemMetar = (props) => {
-    const AllMetars = []
+    const array_metars = SampleResponseMetars
+    const historic_metars = array_metars.slice(1)
 
-    // Push each raw METAR into the AllMetars array
-    {SampleResponseMetars.map((METAR) => (
-        AllMetars.push(METAR.rawOb)
-    ))}
-
-    // Generate array with historic metars only
-    const currentMetar = AllMetars.shift(); // This function returns the first (most recent) metar and deletes it from array
-    const historicMetars = AllMetars;       // This function returns all the rest metars 
-
-    if ( props.onlyHistoric === true  ) {
-        return (
-            <>
-            <View style={styles.container}>
-                <Text style={styles.title}>Historic metars</Text>
-                {historicMetars.map((historicMetar) => (
-                    <Text key={historicMetar}>{historicMetar}</Text>
-                ))}
-            </View>
-            </>
-        )
-    } else {
+    if ( props.onlyCurrent === true ){
         return (
             <>
             <View style={styles.container}>
                 <Text style={styles.title}>Current METAR</Text>
-                <Text style={styles.paragraph}>{currentMetar}</Text>
+                <Text style={styles.paragraph}>{array_metars[0].rawOb}</Text>
             </View>
             </>
+        )
+    } else if ( props.onlyHistoric === true  ) {
+        return (
+            <View style={styles.container}>
+                <Text style={styles.title}>Historic METARs</Text>
+                { historic_metars.map((item) => (
+                    <View key={item.metar_id}>
+                        <Text>{item.rawOb}</Text>
+                    </View>
+                ))}
+            </View>
         )
     }
 }
