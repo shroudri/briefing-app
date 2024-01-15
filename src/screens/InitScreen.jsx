@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import theme from '../theme';
-import SearchInputLabel from './SearchInputLabel';
+import SearchInputLabel from '../components/SearchInputLabel';
 
 
 const InitScreen = () => {
