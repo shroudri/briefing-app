@@ -13,31 +13,24 @@ export default function ItemMetar(props) {
     setLoading(false);
   };
 
-  const renderItem = ({ item }) => {
-    return (
-      <View>
-        <Text>{item.rawOb}</Text>
-      </View>
-    );
-  };
-
   useEffect(() => {
     fetchData();
   }, []);
 
-  return (
-      <View style={styles.container}>
-          <Text style={styles.title}>Recent METARs</Text>
-            {loading && <Text>Loading...</Text>}
-            {data && (
-              <FlatList
-                data={data}
-                renderItem={renderItem}
-                keyExtractor={(item) => item.metar_id.toString()}
-              />
-            )}
-      </View>
+  return(
+    <View style={styles.container}>
+      <Text style={styles.title}>Recent METARs</Text>
+      {loading && <Text>Loading...</Text>}
+      {data && (
+        data.map((item) => (
+          <View key={item.metar_id}>
+            <Text>{item.rawOb}</Text>
+          </View>
+        ))
+      )}
+    </View>
   )
+
 }
 
 const styles = StyleSheet.create({

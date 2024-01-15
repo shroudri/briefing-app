@@ -5,9 +5,8 @@ import Constants from 'expo-constants';
 import { StatusBar } from "react-native";
 
 import InitScreen from "./InitScreen";
-import WeatherScreen from "./AirportScreen";
+import WxScreen from "./../screens/WxView";
 import AppHeader from "./AppHeader";
-import AirportScreen from "./AirportScreen";
 
 
 // Define routes
@@ -20,7 +19,7 @@ export default function Main() {
 
             <Routes>
                 <Route exact path="/" element={<InitScreen />} />
-                <Route exact path="/search/:ICAO" element={<AirportScreen />} />
+                <Route exact path="/search/:ICAO" element={<WxScreen />} />
                 <Route exact path="/notams" element={<Text>Notams</Text>} />
                 <Route exact path="/settings" element={<Text>Settings</Text>} />
             </Routes>

@@ -25,19 +25,34 @@ export default function ItemTaf(props) {
     fetchData();
   }, []);
 
-  return (
-      <View style={styles.container}>
-          <Text style={styles.title}>Current TAF</Text>
-            {loading && <Text>Loading...</Text>}
-            {data && (
-              <FlatList
-                data={data}
-                renderItem={renderItem}
-                keyExtractor={(item) => item.tafId.toString()}
-              />
-            )}
-      </View>
+
+  return(
+    <View style={styles.container}>
+      <Text style={styles.title}>Current TAF</Text>
+      {loading && <Text>Loading...</Text>}
+      {data && (
+        data.map((item) => (
+          <View key={item.tafId}>
+            <Text>{item.rawTAF}</Text>
+          </View>
+        ))
+      )}
+    </View>
   )
+
+  // return (
+  //     <View style={styles.container}>
+  //         <Text style={styles.title}>Current TAF</Text>
+  //           {loading && <Text>Loading...</Text>}
+  //           {data && (
+  //             <FlatList
+  //               data={data}
+  //               renderItem={renderItem}
+  //               keyExtractor={(item) => item.tafId.toString()}
+  //             />
+  //           )}
+  //     </View>
+  // )
 }
 
 const styles = StyleSheet.create({
