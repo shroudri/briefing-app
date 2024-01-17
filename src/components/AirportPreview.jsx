@@ -1,5 +1,6 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useState, useEffect } from 'react';
+import {  redirect, useNavigate }  from 'react-router-native';
 import { Card, Button, Icon } from '@rneui/themed';
 import { fetchLastMetar } from '../apiCalls/ApiMethods'; 
 
@@ -9,7 +10,9 @@ import theme from '../theme';
 export default function AirportPreview(props) {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
-  
+    const navigate = useNavigate();
+
+
     const fetchData = async () => {
       const resp = await fetch(`http://aviationweather.gov/api/data/metar?ids=${props.airport}&format=json`);
       const data = await resp.json();
@@ -22,10 +25,12 @@ export default function AirportPreview(props) {
     }, []);
 
     return (
-        <Card>
-            <Text style={ privStyles.text }>{props.airport}</Text>
-            <Text>{data.rawOb}</Text>
-        </Card>
+        <TouchableOpacity onPress={() => navigate("/search/" + props.airport)}>
+            <Card>
+                <Text style={ privStyles.text }>{props.airport}</Text>
+                <Text>{data.rawOb}</Text>
+            </Card>
+        </TouchableOpacity>
     )
 }
 
