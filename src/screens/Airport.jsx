@@ -2,21 +2,21 @@ import { React, useState } from "react";
 import { View, Text, Button, ScrollView } from "react-native";
 import { useParams } from "react-router-native";
 import AppSubHeader from "../components/AppSubHeader";
-import ItemMetar from "../components/ItemMetar";
-import ItemTaf from "../components/ItemTaf";
+import MetarList from "../components/MetarList";
+import TafList from "../components/TafList";
 
-const WxScreen = () => {
+const Airport = () => {
     const { ICAO } = useParams();
 
     return (
         <>
         <AppSubHeader icaoCode={ICAO} />
         <ScrollView>
-            <ItemMetar airport={ICAO} />
-            <ItemTaf airport={ICAO} />
+            <MetarList airport={ICAO} />
+            <TafList airport={ICAO} />
         </ScrollView>
         </>
     );
 }
 
-export default WxScreen;
+export default Airport;

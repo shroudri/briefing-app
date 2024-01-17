@@ -7,7 +7,7 @@ import { fetchLastMetar } from '../apiCalls/ApiMethods';
 
 import theme from '../theme';
 
-export default function AirportPreview(props) {
+export default function AirportQuickCard(props) {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();

@@ -7,7 +7,7 @@ import {useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
 
 
-const SearchInputLabel = () => {
+const SearchBar = () => {
   const [inputValue, setInputValue] = useState('');
   const navigate = useNavigate();
 
@@ -49,5 +49,5 @@ const SearchInputLabel = () => {
   );
 };
 
-export default SearchInputLabel;
+export default SearchBar;
 

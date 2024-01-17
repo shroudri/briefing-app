@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Text, View, FlatList, StyleSheet } from 'react-native';
 import theme from '../theme';
 
-export default function ItemMetar(props) {
+export default function MetarList(props) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 

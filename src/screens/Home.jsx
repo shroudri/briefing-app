@@ -3,10 +3,10 @@ import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import theme from '../theme';
-import SearchInputLabel from '../components/SearchInputLabel';
-import AirportPreview from '../components/AirportPreview';
+import SearchBar from '../components/SearchBar';
+import AirportQuickCard from '../components/AirportQuickCard';
 
-const InitScreen = () => {
+const HomeScreen = () => {
   const [favAirportList, setFavAirportList] = useState([]);
 
   useEffect(() => {
@@ -28,11 +28,11 @@ const InitScreen = () => {
 
   return (
         <View style={styles.container}>
-            <SearchInputLabel/>
+            <SearchBar/>
             <ScrollView>
               {favAirportList
                ? favAirportList.map((airport) => 
-                  <AirportPreview key={airport} airport={airport} />) 
+                  <AirportQuickCard key={airport} airport={airport} />) 
                : <Text>Loading...</Text>}
             </ScrollView>
         </View>
@@ -48,4 +48,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default InitScreen;
+export default HomeScreen;
