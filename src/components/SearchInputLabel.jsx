@@ -44,6 +44,7 @@ const SearchInputLabel = () => {
         onPress: handlePress
       }}
       validationSchema={inputValidationSchema}
+      containerStyle={{margin: 0}}
     />
   );
 };

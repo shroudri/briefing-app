@@ -28,9 +28,12 @@ const InitScreen = () => {
 
   return (
         <View style={styles.container}>
-            <SearchInputLabel />
+            <SearchInputLabel/>
             <ScrollView>
-              {favAirportList ? favAirportList.map((airport) => <AirportPreview key={airport} airport={airport} />) : <Text>Loading...</Text>}
+              {favAirportList
+               ? favAirportList.map((airport) => 
+                  <AirportPreview key={airport} airport={airport} />) 
+               : <Text>Loading...</Text>}
             </ScrollView>
         </View>
     );

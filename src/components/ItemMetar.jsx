@@ -24,7 +24,7 @@ export default function ItemMetar(props) {
       {data && (
         data.map((item) => (
           <View key={item.metar_id}>
-            <Text>{item.rawOb}</Text>
+            <Text style={styles.paragraph}>{item.rawOb}</Text>
           </View>
         ))
       )}
@@ -42,6 +42,8 @@ const styles = StyleSheet.create({
       fontSize: theme.text.contentTitle.fontSize
   },
   paragraph: {
-      fontSize: theme.text.contentParagraph.fontSize
+      // fontSize: theme.text.contentParagraph.fontSize
+      fontSize: 14,
+      margin: 2
   }
 })

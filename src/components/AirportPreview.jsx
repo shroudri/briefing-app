@@ -32,6 +32,7 @@ export default function AirportPreview(props) {
 const privStyles = StyleSheet.create({
     container: {
         flex: 1,
+        marginTop: 30,
         padding: 10,
         borderSize: 2,
         borderCurveRadius: 5,
