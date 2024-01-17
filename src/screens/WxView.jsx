@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useState } from "react";
 import { View, Text, Button, ScrollView } from "react-native";
 import { useParams } from "react-router-native";
 import AppSubHeader from "../components/AppSubHeader";
@@ -10,7 +10,7 @@ const WxScreen = () => {
 
     return (
         <>
-        <AppSubHeader title={ICAO} />
+        <AppSubHeader icaoCode={ICAO} />
         <ScrollView>
             <ItemMetar airport={ICAO} />
             <ItemTaf airport={ICAO} />
