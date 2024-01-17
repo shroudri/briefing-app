@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import theme from '../theme';
 import SearchInputLabel from '../components/SearchInputLabel';
-
+import AirportPreview from '../components/AirportPreview';
 
 const InitScreen = () => {
   const [favAirportList, setFavAirportList] = useState([]);
@@ -26,12 +26,12 @@ const InitScreen = () => {
     }
   };
 
-
-
   return (
         <View style={styles.container}>
             <SearchInputLabel />
-            {favAirportList ? favAirportList.map((airport) => <Text key={airport}>{airport}</Text>) : <Text>Loading...</Text>}
+            <ScrollView>
+              {favAirportList ? favAirportList.map((airport) => <AirportPreview key={airport} airport={airport} />) : <Text>Loading...</Text>}
+            </ScrollView>
         </View>
     );
 }
