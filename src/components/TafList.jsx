@@ -9,21 +9,32 @@ export default function TafList(props) {
   const fetchTaf = async () => {
     const resp = await fetch(`https://aviationweather.gov/api/data/taf?ids=${props.airport}&format=json`);
     const taf = await resp.json();
+
     setTaf(taf);
     setLoading(false);
-  };
-
-  const renderItem = ({ item }) => {
-    return (
-      <View>
-        <Text>{item.rawTAF}</Text>
-      </View>
-    );
   };
 
   useEffect(() => {
     fetchTaf();
   }, []);
+
+  const humanizeTaf = (taf) => {
+    const keywords = ["TEMPO", "BECMG", "RMK"];
+    var words = taf.split(" ");
+
+    for (var i = 0; i < words.length; i++) {
+      // Handle BECMG - only if not precluded by prob
+      if (keywords.includes(words[i]) && (!words[i - 1].includes("PROB"))) {
+        words[i] = '\n  ' + words[i];
+      // Handle PROB30 BECMG
+      } else if (words[i].includes("PROB") && (keywords.includes(words[i + 1]))) {
+        words[i] = '\n  ' + words[i];
+      }
+
+    }
+    return words.join(' ');
+  }
+
 
 
   return(
@@ -33,7 +44,7 @@ export default function TafList(props) {
       {taf && (
         taf.map((item) => (
           <View key={item.tafId}>
-            <Text>{item.rawTAF}</Text>
+            <Text>{humanizeTaf(item.rawTAF)}</Text>
           </View>
         ))
       )}
