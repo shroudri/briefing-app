@@ -3,13 +3,13 @@ import { Text, View, FlatList, StyleSheet } from 'react-native';
 import theme from '../theme';
 
 export default function MetarList(props) {
-  const [data, setData] = useState([]);
+  const [metars, setMetars] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
     const resp = await fetch(`http://aviationweather.gov/api/data/metar?ids=${props.airport}&format=json&hours=6`);
-    const data = await resp.json();
-    setData(data);
+    const metars = await resp.json();
+    setMetars(metars);
     setLoading(false);
   };
 
@@ -21,8 +21,8 @@ export default function MetarList(props) {
     <View style={styles.container}>
       <Text style={styles.title}>Recent METARs</Text>
       {loading && <Text>Loading...</Text>}
-      {data && (
-        data.map((item) => (
+      {metars && (
+        metars.map((item) => (
           <View key={item.metar_id}>
             <Text style={styles.paragraph}>{item.rawOb}</Text>
           </View>

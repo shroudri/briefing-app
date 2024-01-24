@@ -3,13 +3,13 @@ import { Text, View, FlatList, StyleSheet } from 'react-native';
 import theme from '../theme';
 
 export default function TafList(props) {
-  const [data, setData] = useState([]);
+  const [taf, setTaf] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchData = async () => {
+  const fetchTaf = async () => {
     const resp = await fetch(`https://aviationweather.gov/api/data/taf?ids=${props.airport}&format=json`);
-    const data = await resp.json();
-    setData(data);
+    const taf = await resp.json();
+    setTaf(taf);
     setLoading(false);
   };
 
@@ -22,7 +22,7 @@ export default function TafList(props) {
   };
 
   useEffect(() => {
-    fetchData();
+    fetchTaf();
   }, []);
 
 
@@ -30,8 +30,8 @@ export default function TafList(props) {
     <View style={styles.container}>
       <Text style={styles.title}>Current TAF</Text>
       {loading && <Text>Loading...</Text>}
-      {data && (
-        data.map((item) => (
+      {taf && (
+        taf.map((item) => (
           <View key={item.tafId}>
             <Text>{item.rawTAF}</Text>
           </View>
@@ -44,9 +44,9 @@ export default function TafList(props) {
   //     <View style={styles.container}>
   //         <Text style={styles.title}>Current TAF</Text>
   //           {loading && <Text>Loading...</Text>}
-  //           {data && (
+  //           {taf && (
   //             <FlatList
-  //               data={data}
+  //               taf={taf}
   //               renderItem={renderItem}
   //               keyExtractor={(item) => item.tafId.toString()}
   //             />
