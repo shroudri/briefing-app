@@ -20,18 +20,20 @@ export default function TafList(props) {
 
   const humanizeTaf = (taf) => {
     const keywords = ["TEMPO", "BECMG", "RMK"];
+    const separator = " "
     var words = taf.split(" ");
+
 
     for (var i = 0; i < words.length; i++) {
       // Handle BECMG - only if not precluded by prob
       if (keywords.includes(words[i]) && (!words[i - 1].includes("PROB"))) {
-        words[i] = '\n  ' + words[i];
+        words[i] = '\n' + separator + words[i];
       // Handle PROB30 BECMG
       } else if (words[i].includes("PROB") && (keywords.includes(words[i + 1]))) {
-        words[i] = '\n  ' + words[i];
+        words[i] = '\n' + separator + words[i];
       }
-
     }
+    
     return words.join(' ');
   }
 
