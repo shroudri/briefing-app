@@ -14,10 +14,16 @@ export default function AirportQuickCard(props) {
 
 
     const fetchData = async () => {
-      const resp = await fetch(`http://aviationweather.gov/api/data/metar?ids=${props.airport}&format=json`);
-      const data = await resp.json();
-      setData(data[0]);
-      setLoading(false);
+        try {
+            const resp = await fetch(`http://aviationweather.gov/api/data/metar?ids=${props.airport}&format=json`);
+            const data = await resp.json();
+            setData(data[0]);
+            setLoading(false);
+        }
+        catch (error) {
+            console.log(error);
+        }
+
     };
   
     useEffect(() => {
