@@ -17,8 +17,8 @@ export default function AirportQuickCard(props) {
         try {
             const resp = await fetch(`http://aviationweather.gov/api/data/metar?ids=${props.airport}&format=json`);
             const data = await resp.json();
-            setData(data[0]);
             setLoading(false);
+            setData(data[0]);
         }
         catch (error) {
             console.log(error);
@@ -34,7 +34,8 @@ export default function AirportQuickCard(props) {
         <TouchableOpacity onPress={() => navigate("/search/" + props.airport)}>
             <Card>
                 <Text style={ privStyles.text }>{props.airport}</Text>
-                <Text>{data.rawOb}</Text>
+                {loading && <Text>Loading...</Text>}
+                {data && <Text>{data.rawOb}</Text>}
             </Card>
         </TouchableOpacity>
     )

@@ -6,12 +6,14 @@ export default function MetarList(props) {
   const [metars, setMetars] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchData = async () => {
+  const fetchMetars = async () => {
     try {
       const resp = await fetch(`http://aviationweather.gov/api/data/metar?ids=${props.airport}&format=json&hours=6`);
       const metars = await resp.json();
-      setMetars(metars);
+
       setLoading(false);
+      setMetars(metars);
+
     }
     catch (error) {
       console.log(error);
@@ -19,7 +21,7 @@ export default function MetarList(props) {
   };
 
   useEffect(() => {
-    fetchData();
+    fetchMetars();
   }, []);
 
   return(

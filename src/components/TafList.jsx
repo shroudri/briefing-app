@@ -31,6 +31,8 @@ export default function TafList(props) {
       // Handle PROB30 BECMG
       } else if (words[i].includes("PROB") && (keywords.includes(words[i + 1]))) {
         words[i] = '\n' + separator + words[i];
+      } else if (words[i].includes("PROB")) {
+        words[i] = '\n' + separator + words[i];
       }
     }
     
