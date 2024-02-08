@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, RefreshControl } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import theme from '../theme';
@@ -9,6 +9,7 @@ import ButtonDeleteFavAirports from '../components/ButtonDeleteFavAirports';
 
 const HomeScreen = () => {
   const [favAirportList, setFavAirportList] = useState([]);
+  const [refreshing, setRefreshing] = React.useState (false);
 
   const retrieveStoredFavAirports = async () => {
     try {
@@ -22,7 +23,7 @@ const HomeScreen = () => {
       console.log('Unable to read userFavAirports from local Storage. Maybe its empty?:', error);
     }
   };
-
+  
   useEffect(() => {
     retrieveStoredFavAirports();
   }, []);
