@@ -2,8 +2,8 @@ import { React, useState } from "react";
 import { View, Text, Button, ScrollView } from "react-native";
 import { useParams } from "react-router-native";
 import AppSubHeader from "../components/AppSubHeader";
-import MetarList from "../components/MetarList";
-import TafList from "../components/TafList";
+import ItemMetar from "../components/ItemMetars";
+import ItemTaf from "../components/ItemTaf";
 
 const Airport = () => {
     const { ICAO } = useParams();
@@ -12,8 +12,8 @@ const Airport = () => {
         <>
         <AppSubHeader icaoCode={ICAO} />
         <ScrollView>
-            <MetarList airport={ICAO} />
-            <TafList airport={ICAO} />
+            <ItemMetar airport={ICAO} />
+            <ItemTaf airport={ICAO} /> 
         </ScrollView>
         </>
     );

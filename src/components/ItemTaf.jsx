@@ -1,28 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, FlatList, StyleSheet } from 'react-native';
 import theme from '../theme';
+import { fetchTaf } from "../apiCalls/apiCalls";
 
-export default function TafList(props) {
-  const [taf, setTaf] = useState([]);
-  const [loading, setLoading] = useState(true);
+export default function ItemTaf(props) {
+  const [data, setData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const fetchTaf = async () => {
-    const resp = await fetch(`https://aviationweather.gov/api/data/taf?ids=${props.airport}&format=json`);
-    const taf = await resp.json();
-
-    setTaf(taf);
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    fetchTaf();
-  }, []);
-
-  const humanizeTaf = (taf) => {
+  const humanizeTaf = (rawTaf) => {
     const keywords = ["TEMPO", "BECMG", "RMK"];
     const separator = " "
-    var words = taf.split(" ");
-
+    var words = rawTaf.split(" ");
 
     for (var i = 0; i < words.length; i++) {
       // Handle BECMG - only if not precluded by prob
@@ -39,14 +27,21 @@ export default function TafList(props) {
     return words.join(' ');
   }
 
-
+  useEffect(() => {
+    async function getData() {
+        const fetchedData = await fetchTaf(props.airport);
+        setData(fetchedData);
+        setIsLoading(false);
+    }
+    getData();
+    }, []);
 
   return(
     <View style={styles.container}>
       <Text style={styles.title}>Current TAF</Text>
-      {loading && <Text>Loading...</Text>}
-      {taf && (
-        taf.map((item) => (
+      {isLoading && <Text>Loading...</Text>}
+      {data && (
+        data.map((item) => (
           <View key={item.tafId}>
             <Text>{humanizeTaf(item.rawTAF)}</Text>
           </View>
@@ -54,20 +49,6 @@ export default function TafList(props) {
       )}
     </View>
   )
-
-  // return (
-  //     <View style={styles.container}>
-  //         <Text style={styles.title}>Current TAF</Text>
-  //           {loading && <Text>Loading...</Text>}
-  //           {taf && (
-  //             <FlatList
-  //               taf={taf}
-  //               renderItem={renderItem}
-  //               keyExtractor={(item) => item.tafId.toString()}
-  //             />
-  //           )}
-  //     </View>
-  // )
 }
 
 const styles = StyleSheet.create({
