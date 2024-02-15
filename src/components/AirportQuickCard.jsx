@@ -17,7 +17,9 @@ export default function AirportQuickCard(props) {
             const resp = await fetch(`http://aviationweather.gov/api/data/metar?ids=${props.airport}&format=json`);
             const data = await resp.json();
             setLoading(false);
-            setData(data[0]);
+            const newLastMetar = [...data]; // Empty
+            newLastMetar.push(data[0]);
+            setData(newLastMetar)
         }
         catch (error) {
             console.log(error);
