@@ -7,12 +7,14 @@ export default function ItemMetars(props) {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  const getData = async () => {
+    await fetchMetars(props.airport).then((data) => {
+      setData(data);
+      setIsLoading(false);
+    })
+  }
+
   useEffect(() => {
-    async function getData() {
-        const fetchedData = await fetchMetars(props.airport);
-        setData(fetchedData);
-        setIsLoading(false);
-    }
     getData();
     }, []);
 

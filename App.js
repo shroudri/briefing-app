@@ -3,6 +3,12 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { NativeRouter, Route, Routes } from "react-router-native";
 import Constants from 'expo-constants';
+import {
+  SafeAreaView,
+  SafeAreaProvider,
+  SafeAreaInsetsContext,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 
 import AppHeader from './src/components/AppHeader';
 import HomeScreen from './src/screens/Home';
@@ -11,7 +17,7 @@ import Airport from './src/screens/Airport';
 
 export default function App() {
   return (
-    <NativeRouter>
+      <NativeRouter>
         <View style={{flex: 1}}>
             <StatusBar style="auto" />
             <AppHeader />
@@ -23,7 +29,7 @@ export default function App() {
                 <Route exact path="/settings" element={<Text>Settings</Text>} />
             </Routes>
         </View>
-    </NativeRouter>
+      </NativeRouter>
   );
 }
 
