@@ -10,9 +10,7 @@ const AppSubHeader = ( props ) => {
     const [favAirportList, setFavAirportList, addFavAirport, removeFavAirport, airportIsInFavList] = useAirports();
 
     useEffect (() => {
-        airportIsInFavList(props.icaoCode).then((result) => {
-            setIsFav(result);
-        })
+      airportIsInFavList(props.icaoCode) ? setIsFav(true) : setIsFav(false);
     }, []);
 
     const handlePress = async (icaoCode) => {
