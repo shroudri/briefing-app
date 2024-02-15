@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert, RefreshControl } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import theme from '../theme';
@@ -9,6 +9,9 @@ import ButtonDeleteFavAirports from '../components/ButtonDeleteFavAirports';
 
 const HomeScreen = () => {
   const [favAirportList, setFavAirportList] = useState([]);
+  const [lastUpdate, setLastUpdate] = useState(new Date());
+
+  console.log("Rendering HomeScreen")
 
   const retrieveStoredFavAirports = async () => {
     try {
@@ -30,7 +33,10 @@ const HomeScreen = () => {
   return (
     <View style={privStyles.container}>
       <SearchBar />
-      <ScrollView>
+      <ScrollView
+            refreshControl={
+                <RefreshControl refreshing={false} onRefresh={() => {setLastUpdate(new Date())}} />
+            }>
         {favAirportList
           ? favAirportList.map((airport) =>
             <AirportQuickCard key={airport} airport={airport} />)
@@ -40,6 +46,9 @@ const HomeScreen = () => {
           ? <Text>No favorites yet</Text>
           : <ButtonDeleteFavAirports setFavAirportList={setFavAirportList}/>}
       </ScrollView>
+      <View style={privStyles.footer}>
+        <Text style = {privStyles.footerText}>Updated at {lastUpdate.toLocaleTimeString()}</Text>
+      </View>
     </View>
     );
 }
@@ -56,6 +65,15 @@ const privStyles = StyleSheet.create({
         backgroundColor: "#e5e5e5",
         borderRadius: 5,
         borderWidth: 1
+    }, 
+    footer: {
+        backgroundColor: "#000000",
+        padding: 3,
+    },
+    footerText: {
+        textAlign: 'center',
+        color: "white",
+        fontSize: 12
     }
 })
 

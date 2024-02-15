@@ -7,13 +7,15 @@ import ItemTaf from "../components/ItemTaf";
 
 const Airport = () => {
     const { ICAO } = useParams();
-    console.log("Rendering component")
+    const [lastUpdate, setLastUpdate] = useState(new Date());
+
+    console.log("Rendering airport " + ICAO)
     return (
         <>
         <AppSubHeader icaoCode={ICAO} />
         <ScrollView
             refreshControl={
-                <RefreshControl refreshing={false} onRefresh={() => {}} />
+                <RefreshControl refreshing={false} onRefresh={() => {setLastUpdate(new Date())}} />
             }
         >
             <ItemMetar airport={ICAO} />
