@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert, RefreshControl } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import useAirports from '../hooks/useAirports';
 
 import theme from '../theme';
 import SearchBar from '../components/SearchBar';
@@ -8,27 +9,8 @@ import AirportQuickCard from '../components/AirportQuickCard';
 import ButtonDeleteFavAirports from '../components/ButtonDeleteFavAirports';
 
 const HomeScreen = () => {
-  const [favAirportList, setFavAirportList] = useState([]);
+  const [favAirportList, setFavAirportList, addFavAirport, removeFavAirport, airportIsInFavList] = useAirports();
   const [lastUpdate, setLastUpdate] = useState(new Date());
-
-  console.log("Rendering HomeScreen")
-
-  const retrieveStoredFavAirports = async () => {
-    try {
-      let favAirportStorage = await AsyncStorage.getItem('userFavAirports');
-      
-      // If favAirportStorage is null, return an empty array
-      let favAirportList = JSON.parse(favAirportStorage);
-
-      setFavAirportList(favAirportList.sort((a, b) => a.localeCompare(b)));
-    } catch (error) {
-      console.log('Unable to read userFavAirports from local Storage. Maybe its empty?:', error);
-    }
-  };
-
-  useEffect(() => {
-    retrieveStoredFavAirports();
-  }, []);
 
   return (
     <View style={privStyles.container}>
@@ -52,7 +34,6 @@ const HomeScreen = () => {
     </View>
     );
 }
-
 
 const privStyles = StyleSheet.create({
     container: {
