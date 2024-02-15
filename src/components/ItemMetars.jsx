@@ -4,26 +4,26 @@ import theme from '../theme';
 import { fetchMetars } from "../apiCalls/apiCalls";
 
 export default function ItemMetars(props) {
-  const [data, setData] = useState(null);
+  const [metars, setMetars] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   const getData = async () => {
     await fetchMetars(props.airport).then((data) => {
-      setData(data);
+      setMetars(data);
       setIsLoading(false);
     })
   }
 
   useEffect(() => {
     getData();
-    }, []);
+  }, []);
 
   return(
     <View style={styles.container}>
       <Text style={styles.title}>Recent METARs</Text>
       {isLoading && <Text>Loading...</Text>}
-      {data && (
-        data.map((item) => (
+      {metars && (
+        metars.map((item) => (
           <View key={item.metar_id}>
             <Text style={styles.paragraph}>{item.rawOb}</Text>
           </View>
