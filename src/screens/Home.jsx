@@ -25,7 +25,7 @@ const HomeScreen = () => {
           : <Text>Loading...</Text>}
 
         {favAirportList.length === 0
-          ? <Text>No favorites yet</Text>
+          ? <Text style={{ textAlign: 'center'  }}>No favorites yet</Text>
           : <ButtonDeleteFavAirports setFavAirportList={setFavAirportList}/>}
       </ScrollView>
       <View style={privStyles.footer}>

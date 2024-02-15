@@ -13,10 +13,11 @@ const AppSubHeader = ( props ) => {
         airportIsInFavList(props.icaoCode).then((result) => {
             setIsFav(result);
         })
-    }, [favAirportList]);
+    }, []);
 
     const handlePress = async (icaoCode) => {
       favAirportList.includes(icaoCode) ? removeFavAirport(icaoCode) : addFavAirport(icaoCode);
+      favAirportList.includes(icaoCode) ? setIsFav(true) : setIsFav(false);
     }
 
     return (

@@ -23,7 +23,6 @@ export default function useAirports() {
 
       const addFavAirport = async (icaoCode) => {
         try {
-          let favAirportList = await retrieveFavAirportList();
           favAirportList.includes(icaoCode) ? console.log("Airport already included in the fav list") : favAirportList.push(icaoCode);
           AsyncStorage.setItem('userFavAirports', JSON.stringify(favAirportList));
           console.log("Saved fav airports: ", favAirportList)
@@ -35,7 +34,6 @@ export default function useAirports() {
   
       const removeFavAirport = async (icaoCode) => {
         try {
-          let favAirportList = await retrieveFavAirportList();
           favAirportList.splice(favAirportList.indexOf(icaoCode), 1)
           AsyncStorage.setItem('userFavAirports', JSON.stringify(favAirportList));
           console.log("Saved fav airports: ", favAirportList)
@@ -46,7 +44,6 @@ export default function useAirports() {
       }
 
       const airportIsInFavList = async (icaoCode) => {
-        let favAirportList = await retrieveFavAirportList();
         return favAirportList.includes(icaoCode)
       }
 
