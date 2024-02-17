@@ -7,7 +7,7 @@ import { Card, Button, Icon } from '@rneui/themed';
 import theme from '../theme';
 
 export default function AirportQuickCard(props) {
-    const [data, setData] = useState([]);
+    const [metar, setMetar] = useState([]);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
@@ -16,10 +16,8 @@ export default function AirportQuickCard(props) {
         try {
             const resp = await fetch(`http://aviationweather.gov/api/data/metar?ids=${props.airport}&format=json`);
             const data = await resp.json();
+            setMetar(data[0].rawOb);
             setLoading(false);
-            const newLastMetar = [...data]; // Empty
-            newLastMetar.push(data[0]);
-            setData(newLastMetar)
         }
         catch (error) {
             console.log(error);
@@ -36,7 +34,7 @@ export default function AirportQuickCard(props) {
             <Card>
                 <Text style={ privStyles.text }>{props.airport}</Text>
                 {loading && <Text>Loading...</Text>}
-                {data && <Text>{data.rawOb}</Text>}
+                {metar && <Text>{metar}</Text>}
             </Card>
         </TouchableOpacity>
     )
