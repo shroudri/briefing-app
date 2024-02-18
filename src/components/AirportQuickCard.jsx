@@ -2,38 +2,36 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useState, useEffect } from 'react';
 import {  redirect, useNavigate }  from 'react-router-native';
 import { Card, Button, Icon } from '@rneui/themed';
-
+import { fetchMetars } from '../apiCalls/apiCalls';
 
 import theme from '../theme';
 
 export default function AirportQuickCard(props) {
     const [metar, setMetar] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
-
-
-    const fetchData = async () => {
-        try {
-            const resp = await fetch(`http://aviationweather.gov/api/data/metar?ids=${props.airport}&format=json`);
-            const data = await resp.json();
+  
+    const getData = async () => {
+        try{
+            const data = await fetchMetars(props.airport, 0);
             setMetar(data[0].rawOb);
-            setLoading(false);
+            setIsLoading(false);
         }
-        catch (error) {
+        catch(error){
             console.log(error);
         }
-
-    };
+    }
   
     useEffect(() => {
-      fetchData();
+      getData();
     }, []);
+
 
     return (
         <TouchableOpacity onPress={() => navigate("/search/" + props.airport)}>
             <Card>
                 <Text style={ privStyles.text }>{props.airport}</Text>
-                {loading && <Text>Loading...</Text>}
+                {isLoading && <Text>Loading...</Text>}
                 {metar && <Text>{metar}</Text>}
             </Card>
         </TouchableOpacity>

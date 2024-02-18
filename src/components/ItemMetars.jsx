@@ -8,7 +8,7 @@ export default function ItemMetars(props) {
   const [isLoading, setIsLoading] = useState(true);
 
   const getData = async () => {
-    await fetchMetars(props.airport).then((data) => {
+    await fetchMetars(props.airport, 3).then((data) => {
       setMetars(data);
       setIsLoading(false);
     })
