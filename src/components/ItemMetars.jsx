@@ -16,7 +16,7 @@ export default function ItemMetars(props) {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [props.refresh]);
 
   return(
     <View style={styles.container}>

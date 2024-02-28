@@ -21,7 +21,7 @@ const HomeScreen = () => {
             }>
         {favAirportList
           ? favAirportList.map((airport) =>
-            <AirportQuickCard key={airport} airport={airport} />)
+            <AirportQuickCard key={airport} airport={airport} refresh={lastUpdate}/>)
           : <Text>Loading...</Text>}
 
         {favAirportList.length === 0

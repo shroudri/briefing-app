@@ -9,7 +9,6 @@ const Airport = () => {
     const { ICAO } = useParams();
     const [lastUpdate, setLastUpdate] = useState(new Date());
 
-    console.log("Rendering airport " + ICAO)
     return (
         <>
         <AppSubHeader icaoCode={ICAO} />
@@ -18,8 +17,8 @@ const Airport = () => {
                 <RefreshControl refreshing={false} onRefresh={() => {setLastUpdate(new Date())}} />
             }
         >
-            <ItemMetar airport={ICAO} />
-            <ItemTaf airport={ICAO} /> 
+            <ItemMetar airport={ICAO} refreshDate={lastUpdate} />
+            <ItemTaf airport={ICAO} refreshDate={lastUpdate} /> 
         </ScrollView>
         </>
     );

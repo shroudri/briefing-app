@@ -34,7 +34,7 @@ export default function ItemTaf(props) {
         setIsLoading(false);
     }
     getData();
-    }, []);
+    }, [props.refresh]);
 
   return(
     <View style={styles.container}>

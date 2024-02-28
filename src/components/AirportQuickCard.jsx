@@ -10,7 +10,7 @@ export default function AirportQuickCard(props) {
     const [metar, setMetar] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
-  
+
     const getData = async () => {
         try{
             const data = await fetchMetars(props.airport, 0);
@@ -24,7 +24,7 @@ export default function AirportQuickCard(props) {
   
     useEffect(() => {
       getData();
-    }, []);
+    }, [props.refresh]);
 
 
     return (
