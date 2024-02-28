@@ -11,30 +11,36 @@ import ButtonDeleteFavAirports from '../components/ButtonDeleteFavAirports';
 const HomeScreen = () => {
   const [favAirportList, setFavAirportList, addFavAirport, removeFavAirport, airportIsInFavList] = useAirports();
   const [lastUpdate, setLastUpdate] = useState(new Date());
+  const [barValue, setBarValue] = useState('');
+
+  const matchingAirports = favAirportList.filter((airport) => {
+    return airport.includes(barValue.toUpperCase());
+  })
 
   return (
     <View style={privStyles.container}>
-      <SearchBar />
+      <SearchBar barValue={barValue} setBarValue={setBarValue} />
       <ScrollView
-            refreshControl={
-                <RefreshControl refreshing={false} onRefresh={() => {setLastUpdate(new Date())}} />
-            }>
-        {favAirportList
-          ? favAirportList.map((airport) =>
-            <AirportQuickCard key={airport} airport={airport} refresh={lastUpdate}/>)
+        refreshControl={
+          <RefreshControl refreshing={false} onRefresh={() => { setLastUpdate(new Date()) }} />
+        }>
+        {matchingAirports
+          ? matchingAirports.map((airport) =>
+            <AirportQuickCard key={airport} airport={airport} refresh={lastUpdate} />)
           : <Text>Loading...</Text>}
 
+        {favAirportList.length === 0 && <Text style={{ textAlign: 'center' }}>No favorites yet</Text>}
+        {favAirportList.length > 0 && matchingAirports.length === 0 && <Text style={{ textAlign: 'center' }}>No matching airports found</Text>}
+
       </ScrollView>
-      
-      {favAirportList.length === 0
-          ? <Text style={{ textAlign: 'center'  }}>No favorites yet</Text>
-          : <ButtonDeleteFavAirports setFavAirportList={setFavAirportList}/>}
-          
+
+      {favAirportList.length > 0 && <ButtonDeleteFavAirports setFavAirportList={setFavAirportList} />}
+
       <View style={privStyles.footer}>
-        <Text style = {privStyles.footerText}>Updated at {lastUpdate.toLocaleTimeString()}</Text>
+        <Text style={privStyles.footerText}>Updated at {lastUpdate.toLocaleTimeString()}</Text>
       </View>
     </View>
-    );
+  );
 }
 
 const privStyles = StyleSheet.create({

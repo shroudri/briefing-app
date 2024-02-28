@@ -7,13 +7,14 @@ import {useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
 
 
-const SearchBar = () => {
-  const [inputValue, setInputValue] = useState('');
+const SearchBar = (props) => {
+  const barValue = props.barValue;
+  const setBarValue = props.setBarValue;
   const navigate = useNavigate();
 
   // Define conditions to validate input
   const inputValidationSchema = yup.object().shape({
-    inputValue: yup
+    barValue: yup
       .string()
       .required("This field can't be empty")
       .min(4, ({ min }) => `ICAO code must have at least ${min} characters`)
@@ -23,10 +24,10 @@ const SearchBar = () => {
   const handlePress = () => {
     // Validate input
     inputValidationSchema
-      .validate({ inputValue })
+      .validate({ barValue })
       .then(() => {
         // If validated, redirect to results page
-        const url = "/search/" + inputValue.toUpperCase();
+        const url = "/search/" + barValue.toUpperCase();
         navigate(url);
       })
       .catch((error) => {
@@ -37,7 +38,7 @@ const SearchBar = () => {
   return (
     <Input
       placeholder='Airport ICAO code'
-      onChangeText={setInputValue}
+      onChangeText={setBarValue}
       rightIcon={{ 
         type: 'material-icons', 
         name: 'search',
