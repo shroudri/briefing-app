@@ -24,10 +24,12 @@ const HomeScreen = () => {
             <AirportQuickCard key={airport} airport={airport} refresh={lastUpdate}/>)
           : <Text>Loading...</Text>}
 
-        {favAirportList.length === 0
+      </ScrollView>
+      
+      {favAirportList.length === 0
           ? <Text style={{ textAlign: 'center'  }}>No favorites yet</Text>
           : <ButtonDeleteFavAirports setFavAirportList={setFavAirportList}/>}
-      </ScrollView>
+          
       <View style={privStyles.footer}>
         <Text style = {privStyles.footerText}>Updated at {lastUpdate.toLocaleTimeString()}</Text>
       </View>
