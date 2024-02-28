@@ -1,4 +1,5 @@
 import React from 'react';
+import { View, Text, StyleSheet } from 'react-native'
 import { useState } from 'react';
 import { Input } from '@rneui/themed';
 import {  redirect, useNavigate }  from 'react-router-native';
@@ -10,6 +11,7 @@ import {yupResolver} from '@hookform/resolvers/yup';
 const SearchBar = (props) => {
   const barValue = props.barValue;
   const setBarValue = props.setBarValue;
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   // Define conditions to validate input
@@ -31,24 +33,36 @@ const SearchBar = (props) => {
         navigate(url);
       })
       .catch((error) => {
+        setError(error.message);
         console.error(error.message);
       });
     }
 
   return (
-    <Input
-      placeholder='Airport ICAO code'
-      onChangeText={setBarValue}
-      rightIcon={{ 
-        type: 'material-icons', 
-        name: 'search',
-        onPress: handlePress
-      }}
-      validationSchema={inputValidationSchema}
-      containerStyle={{margin: 0}}
-    />
+    <>
+      <Input
+        placeholder='Airport ICAO code'
+        onChangeText={setBarValue}
+        rightIcon={{ 
+          type: 'material-icons', 
+          name: 'search',
+          onPress: handlePress
+        }}
+        validationSchema={inputValidationSchema}
+        containerStyle={{margin: 0}}
+        errorStyle={ privStyles.errorText }
+        errorMessage={error}
+        />
+    </>
   );
 };
+
+const privStyles = StyleSheet.create({
+  errorText: {
+    color: 'red',
+    textAlign: 'center'
+  }
+})
 
 export default SearchBar;
 
