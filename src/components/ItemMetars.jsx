@@ -1,12 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Text, View, FlatList, StyleSheet } from 'react-native';
 import theme from '../theme';
 import { fetchMetars } from "../apiCalls/apiCalls";
 
+import { SettingsContext } from '../contexts/SettingsContext';
+
 export default function ItemMetars(props) {
+  const userSettings = useContext(SettingsContext);
   const [metars, setMetars] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  console.log(userSettings)
   const getData = async () => {
     await fetchMetars(props.airport, 3).then((data) => {
       setMetars(data);

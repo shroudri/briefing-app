@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { NativeRouter, Route, Routes } from "react-router-native";
@@ -14,9 +14,11 @@ import AppHeader from './src/components/AppHeader';
 import HomeScreen from './src/screens/Home';
 import Airport from './src/screens/Airport';
 
+import { SettingsContext, SettingsContextProvider } from './src/contexts/SettingsContext';
 
 export default function App() {
   return (
+    <SettingsContextProvider>
       <NativeRouter>
         <View style={{flex: 1}}>
             <StatusBar style="auto" />
@@ -30,6 +32,7 @@ export default function App() {
             </Routes>
         </View>
       </NativeRouter>
+    </SettingsContextProvider>
   );
 }
 

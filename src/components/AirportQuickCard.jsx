@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {  redirect, useNavigate }  from 'react-router-native';
 import { Card, Button, Icon } from '@rneui/themed';
 import { fetchMetars } from '../apiCalls/apiCalls';
