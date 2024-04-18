@@ -28,7 +28,7 @@ const AppHeader = () => {
       placement="center"
       rightComponent={
         <View>
-        <TouchableOpacity onPress={() => Alert.alert('Warning', 'This funcionality is not yet available')}>
+        <TouchableOpacity onPress={() => navigate('/settings')}>
           <Icon name="settings" type="material" color="#fff" />
         </TouchableOpacity>
       </View>

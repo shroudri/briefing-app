@@ -13,6 +13,7 @@ import {
 import AppHeader from './src/components/AppHeader';
 import HomeScreen from './src/screens/Home';
 import Airport from './src/screens/Airport';
+import Settings from './src/screens/Settings';
 
 import { SettingsContext, SettingsContextProvider } from './src/contexts/SettingsContext';
 
@@ -28,7 +29,7 @@ export default function App() {
                 <Route exact path="/" element={<HomeScreen />} />
                 <Route exact path="/search/:ICAO" element={<Airport />} />
                 <Route exact path="/notams" element={<Text>Notams</Text>} />
-                <Route exact path="/settings" element={<Text>Settings</Text>} />
+                <Route exact path="/settings" element={<Settings />} />
             </Routes>
         </View>
       </NativeRouter>
