@@ -6,7 +6,7 @@ import { fetchMetars } from "../apiCalls/apiCalls";
 import { SettingsContext } from '../contexts/SettingsContext';
 
 export default function ItemMetars(props) {
-  const userSettings = useContext(SettingsContext);
+  const UserSettings = useContext(SettingsContext);
   const [metars, setMetars] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   
@@ -32,7 +32,7 @@ export default function ItemMetars(props) {
     },
     paragraph: {
         // fontSize: theme.text.contentParagraph.fontSize
-        fontSize: userSettings.textSize,
+        fontSize: UserSettings.textSize,
         margin: 2
     }
   })
