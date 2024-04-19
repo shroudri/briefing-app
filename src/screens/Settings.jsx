@@ -1,16 +1,15 @@
 import React, {useContext} from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Switch } from 'react-native';
+import {Slider} from '@miblanchard/react-native-slider';
 
-
-import Slider from '@react-native-community/slider';
 
 import { SettingsContext } from '../contexts/SettingsContext';
 import theme from '../theme';
 
 export default function Settings() {
-    const UserSettings = useContext(SettingsContext);
-    console.log(UserSettings)
-
+    let UserSettings = useContext(SettingsContext);
+    let textSize = UserSettings.textSize
+    console.log("UserSettings text Size: ", textSize)
 
     const handleTextSizeChange = (value) => {
         UserSettings.setTextSize(value)
@@ -18,16 +17,23 @@ export default function Settings() {
 
     return (
         <View style={privStyles.container}>
-            <Text style={{textAlign: 'center', fontWeight: 'bold', fontSize: 20}}>Settings</Text>
-            <Text style={{fontSize: 15}}>Text Size: {UserSettings.textSize}</Text>
-            <Slider
-                //style={{ marginLeft: 10, marginRight: 10 }}
-                minimumValue={10}
-                maximumValue={25}
-                step={1}
-                onValueChange={handleTextSizeChange}
-            />
+            <Text style={privStyles.header}>Settings</Text>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <View style={{flex: 1, height: 1, backgroundColor: 'black', marginTop: 5}} />
+            </View>
 
+            {/* TEXT SIZE SETTINGS */}
+            <Text style={privStyles.h2}>Text size</Text>
+            <View>
+                <Slider
+                    minimumValue={10}
+                    maximumValue={25}
+                    step={1}
+                    value={textSize}
+                    onValueChange={value => handleTextSizeChange(value)}
+                />
+                <Text>Value: {UserSettings.textSize}</Text>
+            </View>
         </View>
     );
 }
@@ -39,8 +45,13 @@ const privStyles = StyleSheet.create({
         margin: 10,
         marginTop: 5
     },
-    titleText: {
+    header: {
         fontWeight: 'bold',
-        fontSize: 18
+        fontSize: 19
+    },
+    h2: {
+        fontWeight: 'bold',
+        fontSize: 15,
+        marginTop: 10
     }
 })
