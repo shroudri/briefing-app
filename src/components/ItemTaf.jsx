@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Text, View, FlatList, StyleSheet } from 'react-native';
+
 import theme from '../theme';
 import { fetchTaf } from "../apiCalls/apiCalls";
+import { SettingsContext } from '../contexts/SettingsContext';
 
 export default function ItemTaf(props) {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const UserSettings = useContext(SettingsContext);
+  
 
   const humanizeTaf = (rawTaf) => {
     const keywords = ["TEMPO", "BECMG", "RMK"];
@@ -36,6 +40,20 @@ export default function ItemTaf(props) {
     getData();
     }, [props.refresh]);
 
+  
+  const styles = StyleSheet.create({
+    container: {
+        padding: 10
+    },
+    title: {
+        fontWeight: theme.text.contentTitle.fontWeight,
+        fontSize: theme.text.contentTitle.fontSize
+    },
+    paragraph: {
+        fontSize: UserSettings.textSize
+    }
+  })
+
   return(
     <View style={styles.container}>
       <Text style={styles.title}>Current TAF</Text>
@@ -43,23 +61,10 @@ export default function ItemTaf(props) {
       {data && (
         data.map((item) => (
           <View key={item.tafId}>
-            <Text>{humanizeTaf(item.rawTAF)}</Text>
+            <Text style={styles.paragraph}>{humanizeTaf(item.rawTAF)}</Text>
           </View>
         ))
       )}
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-      padding: 10
-  },
-  title: {
-      fontWeight: theme.text.contentTitle.fontWeight,
-      fontSize: theme.text.contentTitle.fontSize
-  },
-  paragraph: {
-      fontSize: theme.text.contentParagraph.fontSize
-  }
-})
