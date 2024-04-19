@@ -1,5 +1,4 @@
 import { createContext, useState } from 'react';
-import { Slider, Text, Icon } from '@rneui/themed';
 
 // Crear el contexto
 export const SettingsContext = createContext();
@@ -14,7 +13,7 @@ export function SettingsContextProvider({children}) {
         <SettingsContext.Provider value={{ 
             textSize: textSize,
             setTextSize: setTextSize,
-            hours: hours,
+            historyHours: hours,
             setHours: setHours,
             darkMode: darkMode,
             setDarkMode: setDarkMode

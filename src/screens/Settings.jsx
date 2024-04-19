@@ -8,14 +8,7 @@ import theme from '../theme';
 
 export default function Settings() {
     let UserSettings = useContext(SettingsContext);
-    let textSize = UserSettings.textSize
-    console.log("UserSettings text Size: ", textSize)
-
-    const handleTextSizeChange = (value) => {
-        // Slider returns array. In order to avoid errors, we need to get value[0]
-        console.log("Value: ", value[0])
-        UserSettings.setTextSize(value[0])
-    }
+    console.log(UserSettings)
 
     const privStyles = StyleSheet.create({
         container: {
@@ -49,11 +42,26 @@ export default function Settings() {
                     minimumValue={10}
                     maximumValue={25}
                     step={1}
-                    value={textSize}
-                    onValueChange={handleTextSizeChange}
+                    value={UserSettings.textSize}
+                    onValueChange={(value) => UserSettings.setTextSize(value[0])}
                 />
                 <Text style={{fontSize: UserSettings.textSize}}>Value: {UserSettings.textSize}</Text>
             </View>
+
+
+            {/* HISTORIC METAR SETTINGS */}
+            <Text style={privStyles.h2}>Metar history</Text>
+            <View>
+                <Slider
+                    minimumValue={1}
+                    maximumValue={24}
+                    step={1}
+                    value={UserSettings.historyHours}
+                    onValueChange={(value) => UserSettings.setHours(value[0])}
+                />
+                <Text style={{fontSize: UserSettings.textSize}}>{UserSettings.historyHours} {UserSettings.historyHours > 1 ? "hours" : "hour"}</Text>
+            </View>
         </View>
+        
     );
 }

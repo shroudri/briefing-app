@@ -9,9 +9,10 @@ export default function ItemMetars(props) {
   const UserSettings = useContext(SettingsContext);
   const [metars, setMetars] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const historyHours = UserSettings.historyHours
   
   const getData = async () => {
-    await fetchMetars(props.airport, 3).then((data) => {
+    await fetchMetars(props.airport, historyHours).then((data) => {
       setMetars(data);
       setIsLoading(false);
     })
