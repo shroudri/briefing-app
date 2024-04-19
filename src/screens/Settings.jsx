@@ -17,6 +17,24 @@ export default function Settings() {
         UserSettings.setTextSize(value[0])
     }
 
+    const privStyles = StyleSheet.create({
+        container: {
+            flex: 1,
+            backgroundColor: theme.colors.background,
+            margin: 10,
+            marginTop: 5
+        },
+        header: {
+            fontWeight: 'bold',
+            fontSize: 19
+        },
+        h2: {
+            fontWeight: 'bold',
+            fontSize: UserSettings.textSize * 1.2,
+            marginTop: 10
+        }
+    })
+
     return (
         <View style={privStyles.container}>
             <Text style={privStyles.header}>Settings</Text>
@@ -34,26 +52,8 @@ export default function Settings() {
                     value={textSize}
                     onValueChange={handleTextSizeChange}
                 />
-                <Text>Value: {UserSettings.textSize}</Text>
+                <Text style={{fontSize: UserSettings.textSize}}>Value: {UserSettings.textSize}</Text>
             </View>
         </View>
     );
 }
-
-const privStyles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: theme.colors.background,
-        margin: 10,
-        marginTop: 5
-    },
-    header: {
-        fontWeight: 'bold',
-        fontSize: 19
-    },
-    h2: {
-        fontWeight: 'bold',
-        fontSize: 15,
-        marginTop: 10
-    }
-})

@@ -41,7 +41,7 @@ export default function AirportQuickCard(props) {
         },
         headerText: {
             fontWeight: theme.text.contentTitle.fontWeight,
-            fontSize: UserSettings.textSize
+            fontSize: UserSettings.textSize * 1.1
         }, 
         metarText: {
             fontSize: UserSettings.textSize

@@ -28,7 +28,7 @@ export default function ItemMetars(props) {
     },
     title: {
         fontWeight: theme.text.contentTitle.fontWeight,
-        fontSize: theme.text.contentTitle.fontSize
+        fontSize: UserSettings.textSize * 1.2
     },
     paragraph: {
         // fontSize: theme.text.contentParagraph.fontSize

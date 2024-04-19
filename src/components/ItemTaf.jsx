@@ -47,7 +47,7 @@ export default function ItemTaf(props) {
     },
     title: {
         fontWeight: theme.text.contentTitle.fontWeight,
-        fontSize: theme.text.contentTitle.fontSize
+        fontSize: UserSettings.textSize * 1.2,
     },
     paragraph: {
         fontSize: UserSettings.textSize
