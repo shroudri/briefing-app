@@ -12,7 +12,9 @@ export default function Settings() {
     console.log("UserSettings text Size: ", textSize)
 
     const handleTextSizeChange = (value) => {
-        UserSettings.setTextSize(value)
+        // Slider returns array. In order to avoid errors, we need to get value[0]
+        console.log("Value: ", value[0])
+        UserSettings.setTextSize(value[0])
     }
 
     return (
@@ -30,7 +32,7 @@ export default function Settings() {
                     maximumValue={25}
                     step={1}
                     value={textSize}
-                    onValueChange={value => handleTextSizeChange(value)}
+                    onValueChange={handleTextSizeChange}
                 />
                 <Text>Value: {UserSettings.textSize}</Text>
             </View>
