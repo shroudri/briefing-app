@@ -15,6 +15,7 @@ const SearchBar = (props) => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const theme = useContext(ThemeContext);
+  const [containerHeight, setContainerHeight] = useState(45);
 
   // Define conditions to validate input
   const inputValidationSchema = yup.object().shape({
@@ -36,6 +37,7 @@ const SearchBar = (props) => {
       })
       .catch((error) => {
         setError(error.message);
+        setContainerHeight(60);
         console.error(error.message);
       });
     }
@@ -53,7 +55,7 @@ const SearchBar = (props) => {
           onPress: handlePress
         }}
         validationSchema={inputValidationSchema}
-        containerStyle={{margin: 0}}
+        containerStyle={{marginBottom: 10, maxHeight: containerHeight}}
         errorStyle={ privStyles.errorText }
         errorMessage={error}
         inputStyle={{ color: theme.colors.paragraphText }}
