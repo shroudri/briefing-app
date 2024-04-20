@@ -32,13 +32,10 @@ export default function AirportQuickCard(props) {
 
 
     const privStyles = StyleSheet.create({
-        container: {
-            flex: 1,
-            marginTop: 30,
-            padding: 10,
-            borderSize: 2,
-            borderCurveRadius: 5,
-            backgroundColor: theme.colors.primary
+        cardContainer:{
+            backgroundColor: theme.colors.airportCardBackground,
+            borderColor: theme.colors.airportCardBorderColor,
+            borderRadius: 7
         },
         headerText: {
             fontWeight: theme.text.contentTitle.fontWeight,
@@ -53,7 +50,7 @@ export default function AirportQuickCard(props) {
 
     return (
         <TouchableOpacity onPress={() => navigate("/search/" + props.airport)}>
-            <Card containerStyle={{ backgroundColor: theme.colors.airportCardBackground, borderColor: theme.colors.airportCardBorderColor }}>
+            <Card containerStyle={ privStyles.cardContainer }>
                 <Text style={ privStyles.headerText }>{props.airport}</Text>
                 {isLoading && <Text>Loading...</Text>}
                 {metar && <Text style={ privStyles.metarText }>{metar}</Text>}
