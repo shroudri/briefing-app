@@ -2,6 +2,9 @@ import React, { useState, useEffect, useContext } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert, RefreshControl } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import useAirports from '../hooks/useAirports';
+import { Icon } from '@rneui/themed';
+
+
 
 import { ThemeContext } from '../contexts/ThemeContext';
 import SearchBar from '../components/SearchBar';
@@ -54,8 +57,10 @@ const HomeScreen = () => {
           : <Text style={{ color: theme.colors.paragraphText }}>Loading...</Text>}
 
         {favAirportList.length === 0 && <Text style={{ textAlign: 'center', color: theme.colors.paragraphText }}>No favorites yet</Text>}
-        {favAirportList.length > 0 && matchingAirports.length === 0 && <Text style={{ textAlign: 'center', color: theme.colors.paragraphText }}>No matching airports found</Text>}
-
+        {favAirportList.length > 0 && matchingAirports.length === 0 && <Text style={{ textAlign: 'center', color: theme.colors.paragraphText }}>No matching airports found within your favorites</Text>}
+        {favAirportList.length > 0 && matchingAirports.length === 0 && <><Text style={{ textAlign: 'center', color: theme.colors.paragraphText }}>Tap 🔍 to search</Text>
+            </>
+        }
       </ScrollView>
 
       {favAirportList.length > 0 && <ButtonDeleteFavAirports setFavAirportList={setFavAirportList} />}
