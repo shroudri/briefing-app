@@ -4,12 +4,14 @@ import theme from '../theme';
 import { fetchMetars } from "../apiCalls/apiCalls";
 
 import { SettingsContext } from '../contexts/SettingsContext';
+import { ThemeContext } from '../contexts/ThemeContext';
 
 export default function ItemMetars(props) {
   const UserSettings = useContext(SettingsContext);
   const [metars, setMetars] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const historyHours = UserSettings.historyHours
+  const theme = useContext(ThemeContext);
   
   const getData = async () => {
     await fetchMetars(props.airport, historyHours).then((data) => {
@@ -29,11 +31,13 @@ export default function ItemMetars(props) {
     },
     title: {
         fontWeight: theme.text.contentTitle.fontWeight,
-        fontSize: UserSettings.textSize * 1.2
+        fontSize: UserSettings.textSize * 1.2,
+        color: theme.colors.paragraphText
     },
     paragraph: {
         // fontSize: theme.text.contentParagraph.fontSize
         fontSize: UserSettings.textSize,
+        color: theme.colors.paragraphText,
         margin: 2
     }
   })

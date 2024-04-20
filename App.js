@@ -15,24 +15,27 @@ import HomeScreen from './src/screens/Home';
 import Airport from './src/screens/Airport';
 import Settings from './src/screens/Settings';
 
-import { SettingsContext, SettingsContextProvider } from './src/contexts/SettingsContext';
+import { SettingsContextProvider } from './src/contexts/SettingsContext';
+import { ThemeContextProvider } from './src/contexts/ThemeContext';
 
 export default function App() {
   return (
     <SettingsContextProvider>
-      <NativeRouter>
-        <View style={{flex: 1}}>
-            <StatusBar style="auto" />
-            <AppHeader />
+      <ThemeContextProvider>
+        <NativeRouter>
+          <View style={{flex: 1}}>
+              <StatusBar style="auto" />
+              <AppHeader />
 
-            <Routes>
-                <Route exact path="/" element={<HomeScreen />} />
-                <Route exact path="/search/:ICAO" element={<Airport />} />
-                <Route exact path="/notams" element={<Text>Notams</Text>} />
-                <Route exact path="/settings" element={<Settings />} />
-            </Routes>
-        </View>
-      </NativeRouter>
+              <Routes>
+                  <Route exact path="/" element={<HomeScreen />} />
+                  <Route exact path="/search/:ICAO" element={<Airport />} />
+                  <Route exact path="/notams" element={<Text>Notams</Text>} />
+                  <Route exact path="/settings" element={<Settings />} />
+              </Routes>
+          </View>
+        </NativeRouter>
+      </ThemeContextProvider>
     </SettingsContextProvider>
   );
 }

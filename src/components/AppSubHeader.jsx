@@ -1,13 +1,16 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useContext } from "react";
 
 import { Header, Icon } from "@rneui/base";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import useAirports from "../hooks/useAirports";
 
+import { ThemeContext } from "../contexts/ThemeContext";
+
 const AppSubHeader = ( props ) => {
     const [isFav, setIsFav] = useState(false);
     const [favAirportList, setFavAirportList, addFavAirport, removeFavAirport, airportIsInFavList] = useAirports();
+    const theme = useContext(ThemeContext);
 
     useEffect (() => {
       favAirportList.includes(props.icaoCode) ? setIsFav(true) : setIsFav(false);
@@ -20,14 +23,14 @@ const AppSubHeader = ( props ) => {
 
     return (
         <Header
-        backgroundColor="#619eff"
+        backgroundColor={theme.colors.appSubHeaderBackground}
         backgroundImageStyle={{}}
         barStyle="default"
         centerComponent={{
           text: `${props.icaoCode}`,
           style: { color: "#fff", fontWeight: "bold" }
         }}
-        containerStyle={{ width: "100%" }}
+        containerStyle={theme.colors.appSubHeaderBackground}
         leftContainerStyle={{}}
         linearGradientProps={{}}
         placement="center"

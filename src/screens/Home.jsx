@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert, RefreshControl } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import useAirports from '../hooks/useAirports';
 
-import theme from '../theme';
+import { ThemeContext } from '../contexts/ThemeContext';
 import SearchBar from '../components/SearchBar';
 import AirportQuickCard from '../components/AirportQuickCard';
 import ButtonDeleteFavAirports from '../components/ButtonDeleteFavAirports';
@@ -12,9 +12,33 @@ const HomeScreen = () => {
   const [favAirportList, setFavAirportList, addFavAirport, removeFavAirport, airportIsInFavList] = useAirports();
   const [lastUpdate, setLastUpdate] = useState(new Date());
   const [barValue, setBarValue] = useState('');
+  const theme = useContext(ThemeContext);
 
   const matchingAirports = favAirportList.filter((airport) => {
     return airport.includes(barValue.toUpperCase());
+  })
+
+  const privStyles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: theme.colors.appBackground
+    },
+    deleteListButton: {
+        margin: 15,
+        padding: 10,
+        backgroundColor: "#e5e5e5",
+        borderRadius: 5,
+        borderWidth: 1
+    }, 
+    footer: {
+        backgroundColor: "#000000",
+        padding: 3,
+    },
+    footerText: {
+        textAlign: 'center',
+        color: "white",
+        fontSize: 12
+    }
   })
 
   return (
@@ -43,28 +67,7 @@ const HomeScreen = () => {
   );
 }
 
-const privStyles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: theme.colors.background
-    },
-    deleteListButton: {
-        margin: 15,
-        padding: 10,
-        backgroundColor: "#e5e5e5",
-        borderRadius: 5,
-        borderWidth: 1
-    }, 
-    footer: {
-        backgroundColor: "#000000",
-        padding: 3,
-    },
-    footerText: {
-        textAlign: 'center',
-        color: "white",
-        fontSize: 12
-    }
-})
+
 
 
 export default HomeScreen;

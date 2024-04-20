@@ -7,7 +7,7 @@ export const SettingsContext = createContext();
 export function SettingsContextProvider({children}) {
     const [textSize, setTextSize] = useState(15);
     const [hours, setHours] = useState(3);
-    const [darkMode, setDarkMode] = useState(false);
+    const [darkMode, setDarkMode] = useState(false); // Toggle to test dark mode
 
     return (
         <SettingsContext.Provider value={{ 

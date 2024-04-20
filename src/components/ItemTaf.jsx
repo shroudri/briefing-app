@@ -4,12 +4,13 @@ import { Text, View, FlatList, StyleSheet } from 'react-native';
 import theme from '../theme';
 import { fetchTaf } from "../apiCalls/apiCalls";
 import { SettingsContext } from '../contexts/SettingsContext';
+import { ThemeContext } from '../contexts/ThemeContext';
 
 export default function ItemTaf(props) {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const UserSettings = useContext(SettingsContext);
-  
+  const theme = useContext(ThemeContext);
 
   const humanizeTaf = (rawTaf) => {
     const keywords = ["TEMPO", "BECMG", "RMK"];
@@ -48,9 +49,11 @@ export default function ItemTaf(props) {
     title: {
         fontWeight: theme.text.contentTitle.fontWeight,
         fontSize: UserSettings.textSize * 1.2,
+        color: theme.colors.paragraphText
     },
     paragraph: {
-        fontSize: UserSettings.textSize
+        fontSize: UserSettings.textSize,
+        color: theme.colors.paragraphText
     }
   })
 

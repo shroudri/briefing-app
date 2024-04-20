@@ -5,13 +5,15 @@ import { Card, Button, Icon } from '@rneui/themed';
 import { fetchMetars } from '../apiCalls/apiCalls';
 
 import { SettingsContext } from '../contexts/SettingsContext';
-import theme from '../theme';
+import { ThemeContext } from '../contexts/ThemeContext';
 
 export default function AirportQuickCard(props) {
     const [metar, setMetar] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
     const UserSettings = useContext(SettingsContext);
+    const theme = useContext(ThemeContext);
+
 
     const getData = async () => {
         try{
@@ -36,21 +38,22 @@ export default function AirportQuickCard(props) {
             padding: 10,
             borderSize: 2,
             borderCurveRadius: 5,
-            borderColor: "#000000",
             backgroundColor: theme.colors.primary
         },
         headerText: {
             fontWeight: theme.text.contentTitle.fontWeight,
-            fontSize: UserSettings.textSize * 1.1
+            fontSize: UserSettings.textSize * 1.1,
+            color: theme.colors.paragraphText
         }, 
         metarText: {
-            fontSize: UserSettings.textSize
+            fontSize: UserSettings.textSize,
+            color: theme.colors.paragraphText
         }
     })
 
     return (
         <TouchableOpacity onPress={() => navigate("/search/" + props.airport)}>
-            <Card>
+            <Card containerStyle={{ backgroundColor: theme.colors.airportCardBackground, borderColor: theme.colors.airportCardBorderColor }}>
                 <Text style={ privStyles.headerText }>{props.airport}</Text>
                 {isLoading && <Text>Loading...</Text>}
                 {metar && <Text style={ privStyles.metarText }>{metar}</Text>}

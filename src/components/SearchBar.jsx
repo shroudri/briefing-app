@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, StyleSheet } from 'react-native'
 import { useState } from 'react';
 import { Input } from '@rneui/themed';
@@ -7,12 +7,14 @@ import * as yup from 'yup';
 import {useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
 
+import { ThemeContext } from '../contexts/ThemeContext';
 
 const SearchBar = (props) => {
   const barValue = props.barValue;
   const setBarValue = props.setBarValue;
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const theme = useContext(ThemeContext);
 
   // Define conditions to validate input
   const inputValidationSchema = yup.object().shape({
@@ -42,16 +44,20 @@ const SearchBar = (props) => {
     <>
       <Input
         placeholder='Airport ICAO code'
+        placeholderTextColor={theme.colors.paragraphText}
         onChangeText={setBarValue}
         rightIcon={{ 
           type: 'material-icons', 
           name: 'search',
+          color: theme.colors.paragraphText,
           onPress: handlePress
         }}
         validationSchema={inputValidationSchema}
         containerStyle={{margin: 0}}
         errorStyle={ privStyles.errorText }
         errorMessage={error}
+       
+        inputStyle={{ color: theme.colors.paragraphText }}
         />
     </>
   );
