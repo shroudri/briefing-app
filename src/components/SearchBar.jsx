@@ -56,8 +56,8 @@ const SearchBar = (props) => {
         containerStyle={{margin: 0}}
         errorStyle={ privStyles.errorText }
         errorMessage={error}
-       
         inputStyle={{ color: theme.colors.paragraphText }}
+        onSubmitEditing={handlePress}
         />
     </>
   );
