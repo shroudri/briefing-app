@@ -24,17 +24,15 @@ const AppSubHeader = ( props ) => {
     return (
         <Header
         backgroundColor={theme.colors.appSubHeaderBackground}
+        statusBarProps={{ backgroundColor: theme.colors.appHeaderBackground }}
         backgroundImageStyle={{}}
         barStyle="default"
         centerComponent={{
           text: `${props.icaoCode}`,
           style: { color: "#fff", fontWeight: "bold" }
         }}
-        containerStyle={theme.colors.appSubHeaderBackground}
-        leftContainerStyle={{}}
         linearGradientProps={{}}
         placement="center"
-        rightContainerStyle={{}}
         rightComponent={
           <Icon
             name={isFav ? "star" : "star-outline"}

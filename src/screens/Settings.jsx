@@ -42,7 +42,7 @@ export default function Settings() {
 
 
             {/* THEME SETTINGS */}
-            <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 10}}>
+            <View style={{ flexDirection: "row", justifyContent: "space-between", marginVertical: 10}}>
             <Text style={privStyles.h2}>Enable dark theme</Text>
             <Switch
                 color={theme.colors.sliderMinimumTrackTintColor}
