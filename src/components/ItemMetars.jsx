@@ -45,7 +45,7 @@ export default function ItemMetars(props) {
   return(
     <View style={styles.container}>
       <Text style={styles.title}>Recent METARs</Text>
-      {isLoading && <Text>Loading...</Text>}
+      {isLoading && <Text style={{ color: theme.colors.paragraphText }}>Loading...</Text>}
       {metars && (
         metars.map((item) => (
           <View key={item.metar_id}>

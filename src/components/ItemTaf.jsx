@@ -60,7 +60,7 @@ export default function ItemTaf(props) {
   return(
     <View style={styles.container}>
       <Text style={styles.title}>Current TAF</Text>
-      {isLoading && <Text>Loading...</Text>}
+      {isLoading && <Text style={{ color: theme.colors.paragraphText }}>Loading...</Text>}
       {data && (
         data.map((item) => (
           <View key={item.tafId}>
