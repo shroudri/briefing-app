@@ -51,10 +51,10 @@ const HomeScreen = () => {
         {matchingAirports
           ? matchingAirports.map((airport) =>
             <AirportQuickCard key={airport} airport={airport} refresh={lastUpdate} />)
-          : <Text>Loading...</Text>}
+          : <Text style={{ color: theme.colors.paragraphText }}>Loading...</Text>}
 
-        {favAirportList.length === 0 && <Text style={{ textAlign: 'center' }}>No favorites yet</Text>}
-        {favAirportList.length > 0 && matchingAirports.length === 0 && <Text style={{ textAlign: 'center' }}>No matching airports found</Text>}
+        {favAirportList.length === 0 && <Text style={{ textAlign: 'center', color: theme.colors.paragraphText }}>No favorites yet</Text>}
+        {favAirportList.length > 0 && matchingAirports.length === 0 && <Text style={{ textAlign: 'center', color: theme.colors.paragraphText }}>No matching airports found</Text>}
 
       </ScrollView>
 
