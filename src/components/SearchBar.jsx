@@ -1,11 +1,8 @@
-import React, { useContext } from 'react';
-import { View, Text, StyleSheet } from 'react-native'
-import { useState } from 'react';
 import { Input } from '@rneui/themed';
-import {  redirect, useNavigate }  from 'react-router-native';
+import React, { useContext, useState } from 'react';
+import { StyleSheet } from 'react-native';
+import { useNavigate } from 'react-router-native';
 import * as yup from 'yup';
-import {useForm} from 'react-hook-form';
-import {yupResolver} from '@hookform/resolvers/yup';
 
 import { ThemeContext } from '../contexts/ThemeContext';
 
@@ -40,7 +37,7 @@ const SearchBar = (props) => {
         setContainerHeight(60);
         console.error(error.message);
       });
-    }
+  }
 
   return (
     <>
@@ -48,19 +45,19 @@ const SearchBar = (props) => {
         placeholder='Airport ICAO code'
         placeholderTextColor={theme.colors.paragraphText}
         onChangeText={setBarValue}
-        rightIcon={{ 
-          type: 'material-icons', 
+        rightIcon={{
+          type: 'material-icons',
           name: 'search',
           color: theme.colors.paragraphText,
           onPress: handlePress
         }}
         validationSchema={inputValidationSchema}
-        containerStyle={{marginBottom: 10, maxHeight: containerHeight}}
-        errorStyle={ privStyles.errorText }
+        containerStyle={{ marginBottom: 10, maxHeight: containerHeight }}
+        errorStyle={privStyles.errorText}
         errorMessage={error}
         inputStyle={{ color: theme.colors.paragraphText }}
         onSubmitEditing={handlePress}
-        />
+      />
     </>
   );
 };

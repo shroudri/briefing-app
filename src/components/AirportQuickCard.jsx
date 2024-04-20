@@ -1,7 +1,7 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import React, { useState, useEffect, useContext } from 'react';
-import {  redirect, useNavigate }  from 'react-router-native';
-import { Card, Button, Icon } from '@rneui/themed';
+import { Card } from '@rneui/themed';
+import React, { useContext, useEffect, useState } from 'react';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { useNavigate } from 'react-router-native';
 import { fetchMetars } from '../apiCalls/apiCalls';
 
 import { SettingsContext } from '../contexts/SettingsContext';
@@ -16,23 +16,23 @@ export default function AirportQuickCard(props) {
 
 
     const getData = async () => {
-        try{
+        try {
             const data = await fetchMetars(props.airport, 0);
             setMetar(data[0].rawOb);
             setIsLoading(false);
         }
-        catch(error){
+        catch (error) {
             console.log(error);
         }
     }
-  
+
     useEffect(() => {
-      getData();
+        getData();
     }, [props.refresh]);
 
 
     const privStyles = StyleSheet.create({
-        cardContainer:{
+        cardContainer: {
             backgroundColor: theme.colors.airportCardBackground,
             borderColor: theme.colors.airportCardBorderColor,
             borderRadius: 7
@@ -41,7 +41,7 @@ export default function AirportQuickCard(props) {
             fontWeight: theme.text.contentTitle.fontWeight,
             fontSize: UserSettings.textSize * 1.1,
             color: theme.colors.paragraphText
-        }, 
+        },
         metarText: {
             fontSize: UserSettings.textSize,
             color: theme.colors.paragraphText
@@ -50,10 +50,10 @@ export default function AirportQuickCard(props) {
 
     return (
         <TouchableOpacity onPress={() => navigate("/search/" + props.airport)}>
-            <Card containerStyle={ privStyles.cardContainer }>
-                <Text style={ privStyles.headerText }>{props.airport}</Text>
-                {isLoading && <Text style={ privStyles.metarText }>Loading...</Text>}
-                {metar && <Text style={ privStyles.metarText }>{metar}</Text>}
+            <Card containerStyle={privStyles.cardContainer}>
+                <Text style={privStyles.headerText}>{props.airport}</Text>
+                {isLoading && <Text style={privStyles.metarText}>Loading...</Text>}
+                {metar && <Text style={privStyles.metarText}>{metar}</Text>}
             </Card>
         </TouchableOpacity>
     )

@@ -1,4 +1,4 @@
-import { createContext, useState, useContext } from 'react';
+import { createContext, useContext } from 'react';
 import { StyleSheet } from 'react-native';
 
 import { SettingsContext } from '../contexts/SettingsContext';
@@ -7,7 +7,7 @@ import { SettingsContext } from '../contexts/SettingsContext';
 export const ThemeContext = createContext();
 
 // Crear el Provider
-export function ThemeContextProvider({children}) {
+export function ThemeContextProvider({ children }) {
     const UserSettings = useContext(SettingsContext);
     const isDarkPreferred = UserSettings.darkMode;
 
@@ -39,7 +39,7 @@ export function ThemeContextProvider({children}) {
     return (
         <ThemeContext.Provider value={
             theme
-            }>
+        }>
             {children}
         </ThemeContext.Provider>
     )

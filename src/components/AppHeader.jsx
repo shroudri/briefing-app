@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
 import { Header, Icon } from "@rneui/base";
-import { Alert, View, TouchableOpacity, Text } from "react-native";
 import Constants from "expo-constants";
+import React, { useContext } from "react";
+import { TouchableOpacity, View } from "react-native";
 import { useNavigate } from "react-router-native";
 
 import { ThemeContext } from "../contexts/ThemeContext";

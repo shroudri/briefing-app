@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { Text, View, FlatList, StyleSheet } from 'react-native';
-import theme from '../theme';
+import React, { useContext, useEffect, useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 import { fetchMetars } from "../apiCalls/apiCalls";
 
 import { SettingsContext } from '../contexts/SettingsContext';
@@ -12,7 +11,7 @@ export default function ItemMetars(props) {
   const [isLoading, setIsLoading] = useState(true);
   const historyHours = UserSettings.historyHours
   const theme = useContext(ThemeContext);
-  
+
   const getData = async () => {
     await fetchMetars(props.airport, historyHours).then((data) => {
       setMetars(data);
@@ -27,22 +26,22 @@ export default function ItemMetars(props) {
   // Styles should be inside the component for them to have access to UserSettingsContext
   const styles = StyleSheet.create({
     container: {
-        padding: 10
+      padding: 10
     },
     title: {
-        fontWeight: theme.text.contentTitle.fontWeight,
-        fontSize: UserSettings.textSize * 1.2,
-        color: theme.colors.paragraphText
+      fontWeight: theme.text.contentTitle.fontWeight,
+      fontSize: UserSettings.textSize * 1.2,
+      color: theme.colors.paragraphText
     },
     paragraph: {
-        // fontSize: theme.text.contentParagraph.fontSize
-        fontSize: UserSettings.textSize,
-        color: theme.colors.paragraphText,
-        margin: 2
+      // fontSize: theme.text.contentParagraph.fontSize
+      fontSize: UserSettings.textSize,
+      color: theme.colors.paragraphText,
+      margin: 2
     }
   })
 
-  return(
+  return (
     <View style={styles.container}>
       <Text style={styles.title}>Recent METARs</Text>
       {isLoading && <Text style={{ color: theme.colors.paragraphText }}>Loading...</Text>}

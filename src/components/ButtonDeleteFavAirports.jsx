@@ -1,5 +1,5 @@
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import theme from '../theme';
 
@@ -17,8 +17,8 @@ export default function ButtonDeleteFavAirports(props) {
             'Caution',
             'Are you sure that you want to erase your list of favorites?',
             [
-                { text: 'Cancel', style: 'cancel',},
-                { text: 'Delete', onPress: () => {deleteFavAirportList(), props.setFavAirportList([])},},
+                { text: 'Cancel', style: 'cancel', },
+                { text: 'Delete', onPress: () => { deleteFavAirportList(), props.setFavAirportList([]) }, },
             ],
             {
                 cancelable: true,
