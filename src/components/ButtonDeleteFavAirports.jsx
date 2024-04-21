@@ -11,7 +11,6 @@ export default function ButtonDeleteFavAirports(props) {
             console.error('Error deleting data:', error);
         }
     }
-
     const handleStorageDeletionPress = () =>
         Alert.alert(
             'Caution',
