@@ -25,7 +25,8 @@ export async function fetchNotams(airport) {
     searchType: "0",
     designatorsForLocation: airport,
     notamsOnly: "true",
-    sort: "CREATION_DATE"     // CREATION_DATE, EFFECTIVE_DATE
+    sortColumns: "4 false",
+    sort: "EFFECTIVE_DATE"  // CREATION_DATE, EFFECTIVE_DATE
   };
 
   const response = await axios({
