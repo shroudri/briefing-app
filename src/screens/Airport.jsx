@@ -3,6 +3,7 @@ import { RefreshControl, ScrollView, View } from "react-native";
 import { useParams } from "react-router-native";
 import AppSubHeader from "../components/AppSubHeader";
 import ItemMetar from "../components/ItemMetars";
+import ItemNotams from "../components/ItemNotams";
 import ItemTaf from "../components/ItemTaf";
 
 import { ThemeContext } from "../contexts/ThemeContext";
@@ -27,6 +28,7 @@ const Airport = () => {
             >
                 <ItemMetar airport={ICAO} refreshDate={lastUpdate} />
                 <ItemTaf airport={ICAO} refreshDate={lastUpdate} />
+                <ItemNotams airport={ICAO} refreshDate={lastUpdate} />
             </ScrollView>
         </View>
     );

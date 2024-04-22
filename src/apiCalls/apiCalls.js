@@ -24,10 +24,11 @@ export async function fetchNotams(airport) {
   const data = {
     searchType: "0",
     designatorsForLocation: airport,
-    notamsOnly: "true"
+    notamsOnly: "true",
+    sort: "CREATION_DATE"     // CREATION_DATE, EFFECTIVE_DATE
   };
 
-  axios({
+  const response = await axios({
     method: 'post',
     url: 'https://notams.aim.faa.gov/notamSearch/search',
     data: data,
@@ -36,10 +37,14 @@ export async function fetchNotams(airport) {
       "Accept": "application/json",
       "Content-Type": "application/x-www-form-urlencoded"
     }
-  }).then(function (response) {
-    console.log("Fetched NOTAMs for airport:", airport);
-    return (response.data);
-  }).catch(function (error) {
-    console.log(error);
-  });
+  })
+  console.log("Fetching NOTAMs for: " + airport);
+  try {
+    const notams = await response.data
+    console.log("NOTAMs received for: " + airport);
+    console.log(notams[0])
+    return notams
+  } catch (error) {
+    console.log(error)
+  }
 }
