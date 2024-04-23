@@ -4,6 +4,7 @@ import { fetchNotams } from "../apiCalls/apiCalls";
 
 import { SettingsContext } from '../contexts/SettingsContext';
 import { ThemeContext } from '../contexts/ThemeContext';
+import NotamQuickCard from './NotamQuickCard';
 
 export default function ItemNotams(props) {
     const UserSettings = useContext(SettingsContext);
@@ -47,8 +48,7 @@ export default function ItemNotams(props) {
             {notams && (
                 notams.map((item) => (
                     <View key={item.notamNumber}>
-                        <Text style={styles.paragraph}>{item.traditionalMessageFrom4thWord}</Text>
-                        <Text style={styles.paragraph}>-------------------</Text>
+                        <NotamQuickCard notam={item} />
                     </View>
                 ))
             )}
