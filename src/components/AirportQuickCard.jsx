@@ -49,7 +49,7 @@ export default function AirportQuickCard(props) {
     })
 
     return (
-        <TouchableOpacity onPress={() => navigate("/search/" + props.airport)}>
+        <TouchableOpacity onPress={() => navigate("/weather/" + props.airport)}>
             <Card containerStyle={privStyles.cardContainer}>
                 <Text style={privStyles.headerText}>{props.airport}</Text>
                 {isLoading && <Text style={privStyles.metarText}>Loading...</Text>}

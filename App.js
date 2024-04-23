@@ -1,19 +1,13 @@
-import React, { useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { View } from 'react-native';
 import { NativeRouter, Route, Routes } from "react-router-native";
-import Constants from 'expo-constants';
-import {
-  SafeAreaView,
-  SafeAreaProvider,
-  SafeAreaInsetsContext,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
 
 import AppHeader from './src/components/AppHeader';
 import HomeScreen from './src/screens/Home';
-import Airport from './src/screens/Airport';
+import NotamsScreen from './src/screens/Notams';
 import Settings from './src/screens/Settings';
+import WeatherScreen from './src/screens/Weather';
 
 import { SettingsContextProvider } from './src/contexts/SettingsContext';
 import { ThemeContextProvider } from './src/contexts/ThemeContext';
@@ -23,16 +17,16 @@ export default function App() {
     <SettingsContextProvider>
       <ThemeContextProvider>
         <NativeRouter>
-          <View style={{flex: 1}}>
-              <StatusBar style="auto" />
-              <AppHeader />
+          <View style={{ flex: 1 }}>
+            <StatusBar style="auto" />
+            <AppHeader />
 
-              <Routes>
-                  <Route exact path="/" element={<HomeScreen />} />
-                  <Route exact path="/search/:ICAO" element={<Airport />} />
-                  <Route exact path="/notams" element={<Text>Notams</Text>} />
-                  <Route exact path="/settings" element={<Settings />} />
-              </Routes>
+            <Routes>
+              <Route exact path="/" element={<HomeScreen />} />
+              <Route exact path="/weather/:ICAO" element={<WeatherScreen />} />
+              <Route exact path="/notams/:ICAO" element={<NotamsScreen />} />
+              <Route exact path="/settings" element={<Settings />} />
+            </Routes>
           </View>
         </NativeRouter>
       </ThemeContextProvider>

@@ -1,15 +1,13 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert, RefreshControl } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { useContext, useState } from 'react';
+import { RefreshControl, ScrollView, StyleSheet, Text, View } from 'react-native';
 import useAirports from '../hooks/useAirports';
-import { Icon } from '@rneui/themed';
 
 
 
-import { ThemeContext } from '../contexts/ThemeContext';
-import SearchBar from '../components/SearchBar';
 import AirportQuickCard from '../components/AirportQuickCard';
 import ButtonDeleteFavAirports from '../components/ButtonDeleteFavAirports';
+import SearchBar from '../components/SearchBar';
+import { ThemeContext } from '../contexts/ThemeContext';
 
 const HomeScreen = () => {
   const [favAirportList, setFavAirportList, addFavAirport, removeFavAirport, airportIsInFavList] = useAirports();
@@ -23,24 +21,24 @@ const HomeScreen = () => {
 
   const privStyles = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: theme.colors.appBackground
+      flex: 1,
+      backgroundColor: theme.colors.appBackground
     },
     deleteListButton: {
-        margin: 15,
-        padding: 10,
-        backgroundColor: "#e5e5e5",
-        borderRadius: 5,
-        borderWidth: 1
-    }, 
+      margin: 15,
+      padding: 10,
+      backgroundColor: "#e5e5e5",
+      borderRadius: 5,
+      borderWidth: 1
+    },
     footer: {
-        backgroundColor: "#000000",
-        padding: 3,
+      backgroundColor: "#000000",
+      padding: 3,
     },
     footerText: {
-        textAlign: 'center',
-        color: "white",
-        fontSize: 12
+      textAlign: 'center',
+      color: "white",
+      fontSize: 12
     }
   })
 
@@ -59,7 +57,7 @@ const HomeScreen = () => {
         {favAirportList.length === 0 && <Text style={{ textAlign: 'center', color: theme.colors.paragraphText }}>No favorites yet</Text>}
         {favAirportList.length > 0 && matchingAirports.length === 0 && <Text style={{ textAlign: 'center', color: theme.colors.paragraphText }}>No matching airports found within your favorites</Text>}
         {favAirportList.length > 0 && matchingAirports.length === 0 && <><Text style={{ textAlign: 'center', color: theme.colors.paragraphText }}>Tap 🔍 to search</Text>
-            </>
+        </>
         }
       </ScrollView>
 
