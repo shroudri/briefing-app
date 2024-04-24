@@ -29,7 +29,7 @@ const SearchBar = (props) => {
       .validate({ barValue })
       .then(() => {
         // If validated, redirect to results page
-        const url = "/search/" + barValue.toUpperCase();
+        const url = "/weather/" + barValue.toUpperCase();
         navigate(url);
       })
       .catch((error) => {
