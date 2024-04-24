@@ -2,6 +2,7 @@ import { Card, Text } from '@rneui/themed';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
+
 export default function NotamQuickCard({ notam }) {
     const swap_datestamp = (date) => {
         if (date.includes("PERM")) {
@@ -19,10 +20,14 @@ export default function NotamQuickCard({ notam }) {
     }
 
     const getNotamMessage = (notam) => {
-        let message_slice1 = notam.icaoMessage.split('E) ')[1]
-        let message_fully_sliced = message_slice1.split('F) ')[0]
-        let message_without_line_breaks = message_fully_sliced.replaceAll('\n', ' ')
-        return message_without_line_breaks
+        try {
+            let message_slice1 = notam.icaoMessage.split('E) ')[1]
+            let message_fully_sliced = message_slice1.split('F) ')[0]
+            let message_without_line_breaks = message_fully_sliced.replaceAll('\n', ' ')
+            return message_without_line_breaks
+        } catch (error) {
+            return notam.traditionalMessageFrom4thWord
+        }
     }
 
     const privStyles = StyleSheet.create({

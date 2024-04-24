@@ -43,6 +43,7 @@ export async function fetchNotams(airport) {
   try {
     const notams = await response.data
     console.log("NOTAMs received for: " + airport);
+    console.log(notams)
     return notams
   } catch (error) {
     console.log(error)
