@@ -38,11 +38,11 @@ export default function NotamQuickCard({ notam }) {
     const privStyles = StyleSheet.create({
         container: {
             flex: 1,
-            marginBottom: 5,
-            marginTop: 0,
+            marginVertical: 7,
             marginHorizontal: 0,
             padding: 5,
             backgroundColor: theme.colors.airportCardBackground,
+            borderRadius: 10
         },
         headerContainer: {
             flex: 1,
