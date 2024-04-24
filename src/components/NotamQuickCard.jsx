@@ -18,6 +18,13 @@ export default function NotamQuickCard({ notam }) {
         return `${dateOnly[0]}`
     }
 
+    const getNotamMessage = (notam) => {
+        let message_slice1 = notam.icaoMessage.split('E) ')[1]
+        let message_fully_sliced = message_slice1.split('F) ')[0]
+        let message_without_line_breaks = message_fully_sliced.replaceAll('\n', ' ')
+        return message_without_line_breaks
+    }
+
     const privStyles = StyleSheet.create({
         container: {
             flex: 1,
@@ -28,7 +35,9 @@ export default function NotamQuickCard({ notam }) {
         },
         headerContainer: {
             flex: 1,
-            flexDirection: 'row'
+            flexDirection: 'row',
+            justifyContent: 'space-evenly',
+            alignContent: 'center'
         },
         verticalContainer: {
             flex: 1,
@@ -45,13 +54,13 @@ export default function NotamQuickCard({ notam }) {
                     <Text>Issued: {getOnlyDate(swap_datestamp(notam.issueDate))}</Text>
                 </View>
                 <View style={privStyles.verticalContainer}>
-                    <Text>Start date: {getOnlyDate(swap_datestamp(notam.startDate))}</Text>
-                    <Text>End date: {getOnlyDate(swap_datestamp(notam.endDate))}</Text>
+                    <Text>Start date: {swap_datestamp(notam.startDate)}</Text>
+                    <Text>End date: {swap_datestamp(notam.endDate)}</Text>
                 </View>
             </View>
             <Card.Divider style={{ margin: 0 }} />
             <View >
-                <Text>{notam.traditionalMessageFrom4thWord}</Text>
+                <Text>{getNotamMessage(notam)}</Text>
 
             </View>
         </Card>
