@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Briefing",
-    "slug": "Briefing",
+    "name": "Briefing Toolkit",
+    "slug": "BriefingToolkit",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon512.png",
@@ -18,11 +18,12 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.therodri2.Briefing",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon1024.png",
         "backgroundColor": "#ffffff"
-      },
-      "package": "com.therodri2.Briefing"
+      }
     },
     "web": {
       "favicon": "./assets/icon512.png"
