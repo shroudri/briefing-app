@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Briefing Toolkit",
-    "slug": "BriefingToolkit",
+    "slug": "Briefing",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon512.png",
