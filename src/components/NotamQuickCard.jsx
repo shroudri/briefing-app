@@ -1,9 +1,11 @@
 import { Card, Text } from '@rneui/themed';
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
-
+import { ThemeContext } from '../contexts/ThemeContext';
 
 export default function NotamQuickCard({ notam }) {
+    const theme = useContext(ThemeContext)
+
     const swap_datestamp = (date) => {
         if (date.includes("PERM")) {
             return date
@@ -37,7 +39,8 @@ export default function NotamQuickCard({ notam }) {
             marginBottom: 5,
             marginTop: 0,
             marginHorizontal: 0,
-            padding: 5
+            padding: 5,
+            backgroundColor: theme.colors.airportCardBackground,
         },
         headerContainer: {
             flex: 1,
@@ -49,6 +52,13 @@ export default function NotamQuickCard({ notam }) {
             flex: 1,
             flexDirection: 'column',
             justifyContent: 'space-evenly',
+        },
+        headerText: {
+            fontWeight: 'bold',
+            color: theme.colors.paragraphText
+        },
+        paragraphText: {
+            color: theme.colors.paragraphText
         }
     })
 
@@ -56,17 +66,17 @@ export default function NotamQuickCard({ notam }) {
         <Card containerStyle={privStyles.container}>
             <View style={privStyles.headerContainer}>
                 <View style={privStyles.verticalContainer}>
-                    <Text style={{ fontWeight: 'bold' }}>{notam.notamNumber}</Text>
-                    <Text>Issued: {getOnlyDate(swap_datestamp(notam.issueDate))}</Text>
+                    <Text style={privStyles.headerText}>{notam.notamNumber}</Text>
+                    <Text style={privStyles.paragraphText}>Issued: {getOnlyDate(swap_datestamp(notam.issueDate))}</Text>
                 </View>
                 <View style={privStyles.verticalContainer}>
-                    <Text>Start date: {swap_datestamp(notam.startDate)}</Text>
-                    <Text>End date: {swap_datestamp(notam.endDate)}</Text>
+                    <Text style={privStyles.paragraphText}>Start date: {swap_datestamp(notam.startDate)}</Text>
+                    <Text style={privStyles.paragraphText}>End date: {swap_datestamp(notam.endDate)}</Text>
                 </View>
             </View>
             <Card.Divider style={{ margin: 0 }} />
             <View >
-                <Text>{getNotamMessage(notam)}</Text>
+                <Text style={privStyles.paragraphText}>{getNotamMessage(notam)}</Text>
 
             </View>
         </Card>

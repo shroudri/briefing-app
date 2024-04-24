@@ -35,7 +35,7 @@ const NotamsScreen = () => {
                 </ScrollView>
             </View>
             <View style={privStyles.menuContainer}>
-                <AirportMenu icaoCode={ICAO} />
+                <AirportMenu icaoCode={ICAO} activeTab="notams" />
             </View>
         </>
     );
