@@ -24,9 +24,10 @@ export default function NotamQuickCard({ notam }) {
             let message_slice1 = notam.icaoMessage.split('E) ')[1]
             let message_fully_sliced = message_slice1.split('F) ')[0]
             let message_without_line_breaks = message_fully_sliced.replaceAll('\n', ' ')
-            return message_without_line_breaks
+            let message_with_apostrophes = message_without_line_breaks.replaceAll('&apos;', "'")
+            return message_with_apostrophes
         } catch (error) {
-            return notam.traditionalMessageFrom4thWord
+            return notam.traditionalMessageFrom4thWord.replaceAll('&apos;', "'")
         }
     }
 
