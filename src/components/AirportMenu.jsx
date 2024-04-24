@@ -18,7 +18,7 @@ export function AirportMenu({ icaoCode, activeTab }) {
             alignItems: 'center',
             justifyContent: 'space-evenly',
             borderWidth: 1,
-            borderColor: theme.colors.airportCardBorderColor,
+            borderColor: theme.colors.airportMenuBorderColor,
             maxHeight: 60,
             padding: 10,
             backgroundColor: theme.colors.airportMenuBackground
