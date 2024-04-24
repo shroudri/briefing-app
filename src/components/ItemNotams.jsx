@@ -43,7 +43,7 @@ export default function ItemNotams(props) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Recent NOTAMs</Text>
+            <Text style={styles.title}>Airport NOTAMs</Text>
             {isLoading && <Text style={{ color: theme.colors.paragraphText }}>Loading...</Text>}
             {notams && (
                 notams.map((item) => (

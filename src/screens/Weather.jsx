@@ -23,7 +23,7 @@ const WeatherScreen = () => {
 
     return (
         <>
-            <View style={{ flex: 1, backgroundColor: theme.colors.appBackground }}>
+            <View style={{ flex: 11, backgroundColor: theme.colors.appBackground }}>
                 <AppSubHeader icaoCode={ICAO} />
                 <ScrollView
                     refreshControl={
