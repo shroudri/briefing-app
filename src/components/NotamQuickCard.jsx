@@ -1,10 +1,12 @@
 import { Card, Text } from '@rneui/themed';
 import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
+import { SettingsContext } from '../contexts/SettingsContext';
 import { ThemeContext } from '../contexts/ThemeContext';
 
 export default function NotamQuickCard({ notam }) {
     const theme = useContext(ThemeContext)
+    const UserSettings = useContext(SettingsContext);
 
     const swap_datestamp = (date) => {
         if (date.includes("PERM")) {
@@ -55,10 +57,12 @@ export default function NotamQuickCard({ notam }) {
         },
         headerText: {
             fontWeight: 'bold',
-            color: theme.colors.paragraphText
+            color: theme.colors.paragraphText,
+            fontSize: UserSettings.textSize,
         },
         paragraphText: {
-            color: theme.colors.paragraphText
+            color: theme.colors.paragraphText,
+            fontSize: UserSettings.textSize
         }
     })
 
