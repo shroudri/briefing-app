@@ -15,6 +15,11 @@ export default function AirportInformationRunways({ data }) {
             fontSize: UserSettings.textSize * 1.2,
             color: theme.colors.paragraphText
         },
+        subtitle: {
+            fontWeight: theme.text.contentTitle.fontWeight,
+            fontSize: UserSettings.textSize,
+            color: theme.colors.paragraphText
+        },
         paragraph: {
             // fontSize: theme.text.contentParagraph.fontSize
             fontSize: UserSettings.textSize,
@@ -37,10 +42,10 @@ export default function AirportInformationRunways({ data }) {
 
                 {data.runways.map((runway) => (
                     <View key={runway.designator}>
-                        <Text style={{ fontWeight: 'bold' }}>{runway.designator}</Text>
+                        <Text style={privStyles.subtitle}>{runway.designator}</Text>
 
-                        <Text>Length: {runway.dimension.length.value} m</Text>
-                        <Text>True heading: {runway.trueHeading}º</Text>
+                        <Text style={privStyles.paragraph}>Length: {runway.dimension.length.value} m</Text>
+                        <Text style={privStyles.paragraph}>True heading: {runway.trueHeading}º</Text>
                     </View>
                 ))}
             </View>

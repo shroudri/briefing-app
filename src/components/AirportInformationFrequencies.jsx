@@ -15,6 +15,11 @@ export default function AirportInformationFrequencies({ data }) {
             fontSize: UserSettings.textSize * 1.2,
             color: theme.colors.paragraphText
         },
+        subtitle: {
+            fontWeight: theme.text.contentTitle.fontWeight,
+            fontSize: UserSettings.textSize,
+            color: theme.colors.paragraphText
+        },
         paragraph: {
             // fontSize: theme.text.contentParagraph.fontSize
             fontSize: UserSettings.textSize,
@@ -46,8 +51,8 @@ export default function AirportInformationFrequencies({ data }) {
             <Text style={privStyles.title}>Frequencies</Text>
             {data.frequencies.map((frequency) => (
                 <View key={frequency.value}>
-                    <Text style={{ fontWeight: 'bold' }}>{frequencyTypes[frequency.type]} ({frequency.name})</Text>
-                    <Text>{frequency.value}</Text>
+                    <Text style={privStyles.subtitle}>{frequencyTypes[frequency.type]} ({frequency.name})</Text>
+                    <Text style={privStyles.paragraph}>{frequency.value}</Text>
                 </View>
             ))}
         </View>
