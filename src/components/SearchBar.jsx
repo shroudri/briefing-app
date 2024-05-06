@@ -1,16 +1,13 @@
 import { Input } from '@rneui/themed';
 import React, { useContext, useState } from 'react';
 import { StyleSheet } from 'react-native';
-import { useNavigate } from 'react-router-native';
 import * as yup from 'yup';
-
 import { ThemeContext } from '../contexts/ThemeContext';
 
 const SearchBar = (props) => {
   const barValue = props.barValue;
   const setBarValue = props.setBarValue;
   const [error, setError] = useState('');
-  const navigate = useNavigate();
   const theme = useContext(ThemeContext);
   const [containerHeight, setContainerHeight] = useState(45);
 
@@ -23,14 +20,15 @@ const SearchBar = (props) => {
       .max(4, ({ max }) => `ICAO code must have a maximum of ${max} characters`)
   });
 
+
   const handlePress = () => {
     // Validate input
     inputValidationSchema
       .validate({ barValue })
       .then(() => {
         // If validated, redirect to results page
-        const url = "/weather/" + barValue.toUpperCase();
-        navigate(url);
+        const ICAO = barValue.toUpperCase();
+        props.navigation.navigate("Weather", { airport: ICAO });
       })
       .catch((error) => {
         setError(error.message);

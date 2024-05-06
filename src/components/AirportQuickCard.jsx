@@ -1,23 +1,25 @@
+import { useNavigation } from '@react-navigation/native';
 import { Card } from '@rneui/themed';
 import React, { useContext, useEffect, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
-import { useNavigate } from 'react-router-native';
 import { fetchMetars } from '../apiCalls/apiCalls';
+
 
 import { SettingsContext } from '../contexts/SettingsContext';
 import { ThemeContext } from '../contexts/ThemeContext';
 
-export default function AirportQuickCard(props) {
+export default function AirportQuickCard({ airport }) {
     const [metar, setMetar] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const navigate = useNavigate();
     const UserSettings = useContext(SettingsContext);
     const theme = useContext(ThemeContext);
+    const navigation = useNavigation();
+
 
 
     const getData = async () => {
         try {
-            const data = await fetchMetars(props.airport, 0);
+            const data = await fetchMetars(airport, 0);
             setMetar(data[0].rawOb);
             setIsLoading(false);
         }
@@ -28,7 +30,7 @@ export default function AirportQuickCard(props) {
 
     useEffect(() => {
         getData();
-    }, [props.refresh]);
+    }, []);
 
 
     const privStyles = StyleSheet.create({
@@ -49,13 +51,13 @@ export default function AirportQuickCard(props) {
     })
 
     return (
-        <TouchableOpacity onPress={() => navigate("/weather/" + props.airport)}>
+        <TouchableOpacity onPress={() => navigation.navigate("Weather", { airport: airport })}>
             <Card containerStyle={privStyles.cardContainer}>
-                <Text style={privStyles.headerText}>{props.airport}</Text>
+                <Text style={privStyles.headerText}>{airport}</Text>
                 {isLoading && <Text style={privStyles.metarText}>Loading...</Text>}
                 {metar && <Text style={privStyles.metarText}>{metar}</Text>}
             </Card>
-        </TouchableOpacity>
+        </TouchableOpacity >
     )
 }
 

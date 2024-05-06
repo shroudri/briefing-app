@@ -1,9 +1,11 @@
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { View } from 'react-native';
-import { NativeRouter, Route, Routes } from "react-router-native";
 
 import AppHeader from './src/components/AppHeader';
+
 import HomeScreen from './src/screens/Home';
 import NotamsScreen from './src/screens/Notams';
 import Settings from './src/screens/Settings';
@@ -13,25 +15,27 @@ import { SettingsContextProvider } from './src/contexts/SettingsContext';
 import { ThemeContextProvider } from './src/contexts/ThemeContext';
 
 export default function App() {
+  const Stack = createNativeStackNavigator();
+
   return (
     <SettingsContextProvider>
       <ThemeContextProvider>
-        <NativeRouter>
+        <NavigationContainer>
+          <AppHeader />
           <View style={{ flex: 1 }}>
             <StatusBar style="auto" />
-            <AppHeader />
-
-            <Routes>
-              <Route exact path="/" element={<HomeScreen />} />
-              <Route exact path="/weather/:ICAO" element={<WeatherScreen />} />
-              <Route exact path="/notams/:ICAO" element={<NotamsScreen />} />
-              <Route exact path="/settings" element={<Settings />} />
-            </Routes>
+            <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
+              <Stack.Screen name="Home" component={HomeScreen} />
+              <Stack.Screen name="Weather" component={WeatherScreen} />
+              <Stack.Screen name="Notams" component={NotamsScreen} />
+              <Stack.Screen name="Settings" component={Settings} />
+            </Stack.Navigator>
           </View>
-        </NativeRouter>
+        </NavigationContainer>
       </ThemeContextProvider>
     </SettingsContextProvider>
-  );
+  )
+
 }
 
 

@@ -1,16 +1,18 @@
 import { React, useContext, useState } from "react";
 import { RefreshControl, ScrollView, StyleSheet, View } from "react-native";
-import { useParams } from "react-router-native";
 import AppSubHeader from "../components/AppSubHeader";
 import ItemNotams from "../components/ItemNotams";
 
 import { AirportMenu } from "../components/AirportMenu";
 import { ThemeContext } from "../contexts/ThemeContext";
 
+import { useRoute } from '@react-navigation/native';
 
 
-const NotamsScreen = () => {
-    const { ICAO } = useParams();
+const NotamsScreen = ({ navigation }) => {
+    const route = useRoute();
+    const ICAO = route.params.airport
+
     const [lastUpdate, setLastUpdate] = useState(new Date());
     const theme = useContext(ThemeContext);
 
@@ -35,7 +37,7 @@ const NotamsScreen = () => {
                 </ScrollView>
             </View>
             <View style={privStyles.menuContainer}>
-                <AirportMenu icaoCode={ICAO} activeTab="notams" />
+                <AirportMenu icaoCode={ICAO} activeTab="notams" navigation={navigation} />
             </View>
         </>
     );

@@ -9,7 +9,7 @@ import ButtonDeleteFavAirports from '../components/ButtonDeleteFavAirports';
 import SearchBar from '../components/SearchBar';
 import { ThemeContext } from '../contexts/ThemeContext';
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
   const [favAirportList, setFavAirportList, addFavAirport, removeFavAirport, airportIsInFavList] = useAirports();
   const [lastUpdate, setLastUpdate] = useState(new Date());
   const [barValue, setBarValue] = useState('');
@@ -44,14 +44,14 @@ const HomeScreen = () => {
 
   return (
     <View style={privStyles.container}>
-      <SearchBar barValue={barValue} setBarValue={setBarValue} />
+      <SearchBar barValue={barValue} setBarValue={setBarValue} navigation={navigation} />
       <ScrollView
         refreshControl={
           <RefreshControl refreshing={false} onRefresh={() => { setLastUpdate(new Date()) }} />
         }>
         {matchingAirports
           ? matchingAirports.map((airport) =>
-            <AirportQuickCard key={airport} airport={airport} refresh={lastUpdate} />)
+            <AirportQuickCard key={airport} airport={airport} refresh={lastUpdate} naviagation={navigation} />)
           : <Text style={{ color: theme.colors.paragraphText }}>Loading...</Text>}
 
         {favAirportList.length === 0 && <Text style={{ textAlign: 'center', color: theme.colors.paragraphText }}>No favorites yet</Text>}

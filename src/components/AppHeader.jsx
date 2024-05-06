@@ -1,15 +1,13 @@
+import { useNavigation } from "@react-navigation/native";
 import { Header, Icon } from "@rneui/base";
 import Constants from "expo-constants";
 import React, { useContext } from "react";
 import { TouchableOpacity, View } from "react-native";
-import { useNavigate } from "react-router-native";
-
 import { ThemeContext } from "../contexts/ThemeContext";
 
 const AppHeader = () => {
-  const navigate = useNavigate();
   const theme = useContext(ThemeContext);
-
+  const navigation = useNavigation();
 
   return (
     <Header
@@ -22,7 +20,7 @@ const AppHeader = () => {
       containerStyle={{ width: "100%", paddingTop: Constants.statusBarHeight + 10, borderBottomWidth: 1, borderBottomColor: theme.colors.appHeaderBackground }}
       leftComponent={
         <View>
-          <TouchableOpacity onPress={() => navigate('/')}>
+          <TouchableOpacity onPress={() => navigation.navigate('Home')}>
             <Icon name="home" type="material" color="#fff" />
           </TouchableOpacity>
         </View>
@@ -30,7 +28,7 @@ const AppHeader = () => {
       placement="center"
       rightComponent={
         <View>
-          <TouchableOpacity onPress={() => navigate('/settings')}>
+          <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
             <Icon name="settings" type="material" color="#fff" />
           </TouchableOpacity>
         </View>
