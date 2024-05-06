@@ -31,7 +31,7 @@ export default function AirportInformationRunways({ data }) {
         <View>
             <Text style={privStyles.title}>Runway information</Text>
             {data.runways.map((runway) => (
-                <View>
+                <View key={runway.designator}>
                     <Text style={{ fontWeight: 'bold' }}>{runway.designator}</Text>
 
                     <Text>Length: {runway.dimension.length.value} m</Text>
