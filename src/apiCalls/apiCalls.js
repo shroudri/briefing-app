@@ -65,7 +65,7 @@ export async function fetchOpenAipAirportId(icaoCode) {
       'x-openaip-client-id': openAipClientId
     }
   })
-  console.log("Fetching airport id for: " + icaoCode)
+  console.log("Querying airport id for: " + icaoCode)
   try {
     const data = await response.data
     const airportId = await data.items[0]._id
@@ -87,7 +87,7 @@ export async function fetchOpenAipAirportData(airportId) {
   })
   try {
     const airportData = await response.data
-    console.log(airportData)
+    console.log("Returned airport data for ID " + airportId)
     return airportData
   } catch (error) {
     console.log(error)

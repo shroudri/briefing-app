@@ -53,7 +53,7 @@ export default function AirportInformationScreen({ navigation }) {
                 {isLoading && <Text>Loading...</Text>}
 
                 {airportData &&
-                    <ScrollView style={{ padding: 5 }}>
+                    <ScrollView style={{ margin: 5 }}>
                         <AirportInformationGeneral data={airportData} />
                         <AirportInformationRunways data={airportData} />
                         <AirportInformationFrequencies data={airportData} />

@@ -27,12 +27,26 @@ export default function AirportInformationFrequencies({ data }) {
         }
     })
 
+    // console.log(data.frequencies) // Remove when done with frequencyTypes setup
+    const frequencyTypes = {
+        0: "Approach",
+        5: "Delivery",
+        6: "Departure",
+        7: "FIS",
+        9: "Ground",
+        12: "Unicom",
+        13: "Radar",
+        14: "Tower",
+        15: "Info",
+        17: "Other"
+    }
+
     return (
         <View>
             <Text style={privStyles.title}>Frequencies</Text>
             {data.frequencies.map((frequency) => (
                 <View key={frequency.value}>
-                    <Text style={{ fontWeight: 'bold' }}>{frequency.name}</Text>
+                    <Text style={{ fontWeight: 'bold' }}>{frequencyTypes[frequency.type]} ({frequency.name})</Text>
                     <Text>{frequency.value}</Text>
                 </View>
             ))}

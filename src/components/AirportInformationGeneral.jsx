@@ -28,6 +28,12 @@ export default function AirportInformationGeneral({ data }) {
         }
     })
 
+    const frequencyTypes = {
+        0: "Approach",
+        9: "Ground",
+        17: "Other"
+    }
+
     return (
         <View>
             <View style={{ flexDirection: 'row' }}>
@@ -37,6 +43,7 @@ export default function AirportInformationGeneral({ data }) {
             {/* <Text>Country: {data.country}</Text> */}
             <Text>Elevation: {Math.round(data.elevation.value * 3.28084)} ft</Text>
             <Text>Runways: {data.runways.length / 2}</Text>
+            <Text>Sunrise: {data.runways.length / 2}</Text>
 
         </View>
     );
