@@ -1,11 +1,11 @@
 import { Icon } from '@rneui/themed';
 import { useContext } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { SettingsContext } from '../contexts/SettingsContext';
 import { ThemeContext } from '../contexts/ThemeContext';
 
-
-
 export function AirportMenu({ icaoCode, activeTab, navigation }) {
+    const UserSettings = useContext(SettingsContext);
     const theme = useContext(ThemeContext);
 
 
@@ -41,6 +41,11 @@ export function AirportMenu({ icaoCode, activeTab, navigation }) {
             <TouchableOpacity style={privStyles.menuItem} onPress={() => navigation.navigate("Weather", { airport: icaoCode })}>
                 <Icon name="cloud" size={30} color={activeTab === "weather" ? theme.colors.airportMenuIcons : "grey"} />
                 <Text style={privStyles.paragraphText}>Weather</Text>
+            </TouchableOpacity>
+            <View style={privStyles.verticalLine}></View>
+            <TouchableOpacity style={privStyles.menuItem} onPress={() => navigation.navigate("AirportInformation", { airport: icaoCode })}>
+                <Icon name="info" type="material" size={30} color={activeTab === "airportInformation" ? theme.colors.airportMenuIcons : "grey"} />
+                <Text style={privStyles.paragraphText}>Airport</Text>
             </TouchableOpacity>
             <View style={privStyles.verticalLine}></View>
             <TouchableOpacity style={privStyles.menuItem} onPress={() => navigation.navigate("Notams", { airport: icaoCode })}>

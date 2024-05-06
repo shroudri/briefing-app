@@ -1,5 +1,7 @@
 import axios from "axios";
 
+const openAipClientId = "c3cdacd9124cb95b9ea593dbad1684d6"
+
 export async function fetchMetars(airport, hours) {
   console.log("Fetching METARS for: " + airport);
   const url = `https://aviationweather.gov/api/data/metar?ids=${airport}&format=json&hours=${hours}`
@@ -45,6 +47,48 @@ export async function fetchNotams(airport) {
     console.log("NOTAMs received for: " + airport);
     console.log(notams)
     return notams
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export async function fetchOpenAipAirportId(icaoCode) {
+  const response = await axios({
+    method: 'get',
+    url: 'https://api.core.openaip.net/api/airports',
+    params: {
+      'fields': '_id',
+      'search': icaoCode
+    },
+    headers: {
+      'accept': 'application/json',
+      'x-openaip-client-id': openAipClientId
+    }
+  })
+  console.log("Fetching airport id for: " + icaoCode)
+  try {
+    const data = await response.data
+    const airportId = await data.items[0]._id
+    return airportId
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export async function fetchOpenAipAirportData(airportId) {
+  const url = `https://api.core.openaip.net/api/airports/${airportId}`
+  const response = await axios({
+    method: 'get',
+    url: url,
+    headers: {
+      'accept': 'application/json',
+      'x-openaip-client-id': openAipClientId
+    }
+  })
+  try {
+    const airportData = await response.data
+    console.log(airportData)
+    return airportData
   } catch (error) {
     console.log(error)
   }

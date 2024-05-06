@@ -6,6 +6,7 @@ import { View } from 'react-native';
 
 import AppHeader from './src/components/AppHeader';
 
+import AirportInformationScreen from './src/screens/AirportInformation';
 import HomeScreen from './src/screens/Home';
 import NotamsScreen from './src/screens/Notams';
 import Settings from './src/screens/Settings';
@@ -27,6 +28,7 @@ export default function App() {
             <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
               <Stack.Screen name="Home" component={HomeScreen} />
               <Stack.Screen name="Weather" component={WeatherScreen} />
+              <Stack.Screen name="AirportInformation" component={AirportInformationScreen} />
               <Stack.Screen name="Notams" component={NotamsScreen} />
               <Stack.Screen name="Settings" component={Settings} />
             </Stack.Navigator>
