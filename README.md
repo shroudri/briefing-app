@@ -1,6 +1,9 @@
 # Briefing-app
 
 ## TODOs:
+- Fix home screen not re-rendering after changing fav airports
+- Fix that, when back button goes to home screen, search bar should be empty
+- Organice src/components 
 - Show crosswind and headwind components
 - Show airport runways and information
 - Cache last metars on a new context, so that, without connection, cached metar is used. This context may also store last update time to be shown
