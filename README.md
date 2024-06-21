@@ -1,7 +1,8 @@
 # Briefing-app
 
 ## TODOs:
-- Fix home screen not re-rendering after changing fav airports
+- Rewrite the way favAirports are stored and retrieved
+- Fix home screen not re-rendering after changing fav airports. This probably has to do with #1 
 - Fix that, when back button goes to home screen, search bar should be empty
 - Organice src/components 
 - Show crosswind and headwind components

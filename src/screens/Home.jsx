@@ -1,7 +1,7 @@
+import { useFocusEffect } from '@react-navigation/native';
 import React, { useContext, useState } from 'react';
 import { RefreshControl, ScrollView, StyleSheet, Text, View } from 'react-native';
 import useAirports from '../hooks/useAirports';
-
 
 
 import AirportQuickCard from '../components/AirportQuickCard';
@@ -14,10 +14,19 @@ const HomeScreen = ({ navigation }) => {
   const [lastUpdate, setLastUpdate] = useState(new Date());
   const [barValue, setBarValue] = useState('');
   const theme = useContext(ThemeContext);
+  const [matchingAirports, setMatchingAirports] = useState([]);
 
-  const matchingAirports = favAirportList.filter((airport) => {
-    return airport.includes(barValue.toUpperCase());
-  })
+  useFocusEffect(
+    React.useCallback(() => {
+      // Code to execute when the screen is focused
+      console.log("Home focused")
+
+      return () =>
+        // Code to execute when the screen is unfocused
+        // Useful for cleanup functions
+        console.log("Home unfocused")
+    }, [])
+  );
 
   const privStyles = StyleSheet.create({
     container: {
