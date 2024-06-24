@@ -12,6 +12,7 @@ import NotamsScreen from './src/screens/Notams';
 import Settings from './src/screens/Settings';
 import WeatherScreen from './src/screens/Weather';
 
+import { AirportsContextProvider } from './src/contexts/AirportsContext';
 import { SettingsContextProvider } from './src/contexts/SettingsContext';
 import { ThemeContextProvider } from './src/contexts/ThemeContext';
 
@@ -21,19 +22,21 @@ export default function App() {
   return (
     <SettingsContextProvider>
       <ThemeContextProvider>
-        <NavigationContainer>
-          <AppHeader />
-          <View style={{ flex: 1 }}>
-            <StatusBar style="auto" />
-            <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
-              <Stack.Screen name="Home" component={HomeScreen} />
-              <Stack.Screen name="Weather" component={WeatherScreen} />
-              <Stack.Screen name="AirportInformation" component={AirportInformationScreen} />
-              <Stack.Screen name="Notams" component={NotamsScreen} />
-              <Stack.Screen name="Settings" component={Settings} />
-            </Stack.Navigator>
-          </View>
-        </NavigationContainer>
+        <AirportsContextProvider>
+          <NavigationContainer>
+            <AppHeader />
+            <View style={{ flex: 1 }}>
+              <StatusBar style="auto" />
+              <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
+                <Stack.Screen name="Home" component={HomeScreen} />
+                <Stack.Screen name="Weather" component={WeatherScreen} />
+                <Stack.Screen name="AirportInformation" component={AirportInformationScreen} />
+                <Stack.Screen name="Notams" component={NotamsScreen} />
+                <Stack.Screen name="Settings" component={Settings} />
+              </Stack.Navigator>
+            </View>
+          </NavigationContainer>
+        </AirportsContextProvider>
       </ThemeContextProvider>
     </SettingsContextProvider>
   )

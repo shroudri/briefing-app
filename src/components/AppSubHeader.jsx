@@ -2,21 +2,23 @@ import { React, useContext, useEffect, useState } from "react";
 
 import { Header, Icon } from "@rneui/base";
 
-import useAirports from "../hooks/useAirports";
 
+import { AirportsContext } from "../contexts/AirportsContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 
 const AppSubHeader = (props) => {
   const [isFav, setIsFav] = useState(false);
-  const [favAirportList, setFavAirportList, addFavAirport, removeFavAirport, airportIsInFavList] = useAirports();
+  const favAirportsContext = useContext(AirportsContext);
   const theme = useContext(ThemeContext);
+
+  let favAirportList = favAirportsContext.favAirports;
 
   useEffect(() => {
     favAirportList.includes(props.icaoCode) ? setIsFav(true) : setIsFav(false);
   }, [favAirportList, props.icaoCode]);
 
-  const handlePress = async (icaoCode) => {
-    favAirportList.includes(icaoCode) ? removeFavAirport(icaoCode) : addFavAirport(icaoCode);
+  const handlePress = (icaoCode) => {
+    favAirportList.includes(icaoCode) ? favAirportsContext.removeFavAirport(icaoCode) : favAirportsContext.addFavAirport(icaoCode);
     favAirportList.includes(icaoCode) ? setIsFav(true) : setIsFav(false);
   }
 
