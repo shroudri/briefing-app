@@ -1,4 +1,7 @@
-import { createContext, useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import { createContext, useEffect, useState } from 'react';
+
 
 // Crear el contexto
 export const AirportsContext = createContext();
@@ -7,9 +10,43 @@ export const AirportsContext = createContext();
 export function AirportsContextProvider({ children }) {
     const [favAirports, setFavAirports] = useState([]);
 
+    const retrieveFavAirportsFromStorage = async () => {
+        try {
+            const value = await AsyncStorage.getItem('favAirports')
+            if (value !== null) {
+                setFavAirports(JSON.parse(value))
+                console.log("Retrieved fav airports from storage: ", value)
+            } else {
+                setFavAirports([])
+            }
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    const saveFavAirportsToStorage = async () => {
+        try {
+            await AsyncStorage.setItem('favAirports', JSON.stringify(favAirports))
+            console.log("Saved fav airports to storage: ", favAirports)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    useEffect(() => {
+        retrieveFavAirportsFromStorage()
+    }, [])
+
+    useEffect(() => {
+        // Avoid saving empty array
+        if (favAirports.length > 0) {
+            saveFavAirportsToStorage()
+        }
+    }, [favAirports])
+
     const addFavAirport = (icaoCode) => {
         try {
-            favAirports.includes(icaoCode) ? console.log("Airport already included in the fav list") : favAirports.push(icaoCode);
+            favAirports.includes(icaoCode) ? console.log("Airport already included in the fav list") : setFavAirports([...favAirports, icaoCode]);
             console.log("Saved fav airports: ", favAirports)
         }
         catch (error) {
