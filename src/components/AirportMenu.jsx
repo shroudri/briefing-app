@@ -43,14 +43,14 @@ export function AirportMenu({ icaoCode, activeTab, navigation }) {
                 <Text style={privStyles.paragraphText}>Weather</Text>
             </TouchableOpacity>
             <View style={privStyles.verticalLine}></View>
-            <TouchableOpacity style={privStyles.menuItem} onPress={() => navigation.navigate("AirportInformation", { airport: icaoCode })}>
-                <Icon name="info" type="material" size={30} color={activeTab === "airportInformation" ? theme.colors.airportMenuIcons : "grey"} />
-                <Text style={privStyles.paragraphText}>Airport</Text>
-            </TouchableOpacity>
-            <View style={privStyles.verticalLine}></View>
             <TouchableOpacity style={privStyles.menuItem} onPress={() => navigation.navigate("Notams", { airport: icaoCode })}>
                 <Icon name="subject" type="material" size={30} color={activeTab === "notams" ? theme.colors.airportMenuIcons : "grey"} />
                 <Text style={privStyles.paragraphText}>Notams</Text>
+            </TouchableOpacity>
+            <View style={privStyles.verticalLine}></View>
+            <TouchableOpacity style={privStyles.menuItem} onPress={() => navigation.navigate("AirportInformation", { airport: icaoCode })}>
+                <Icon name="info" type="material" size={30} color={activeTab === "airportInformation" ? theme.colors.airportMenuIcons : "grey"} />
+                <Text style={privStyles.paragraphText}>Airport</Text>
             </TouchableOpacity>
         </View >
     );
