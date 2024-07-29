@@ -75,6 +75,29 @@ export async function fetchOpenAipAirportId(icaoCode) {
   }
 }
 
+export async function fetchOpenAipAirportIdByIATA(iataCode) {
+  const response = await axios({
+    method: 'get',
+    url: 'https://api.core.openaip.net/api/airports',
+    params: {
+      'fields': '_id',
+      'search': iataCode
+    },
+    headers: {
+      'accept': 'application/json',
+      'x-openaip-client-id': openAipClientId
+    }
+  })
+  console.log("Querying airport id for: " + iataCode)
+  try {
+    const data = await response.data
+    const airportId = await data.items[0]._id
+    return airportId
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 export async function fetchOpenAipAirportData(airportId) {
   const url = `https://api.core.openaip.net/api/airports/${airportId}`
   const response = await axios({
@@ -87,6 +110,7 @@ export async function fetchOpenAipAirportData(airportId) {
   })
   try {
     const airportData = await response.data
+    //const iataCode = await airportData.iataCode
     console.log("Returned airport data for ID " + airportId)
     return airportData
   } catch (error) {

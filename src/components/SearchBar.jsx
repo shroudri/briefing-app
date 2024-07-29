@@ -4,6 +4,8 @@ import { StyleSheet } from 'react-native';
 import * as yup from 'yup';
 import { ThemeContext } from '../contexts/ThemeContext';
 
+import { fetchOpenAipAirportData, fetchOpenAipAirportIdByIATA } from "../apiCalls/apiCalls";
+
 const SearchBar = (props) => {
   const barValue = props.barValue;
   const setBarValue = props.setBarValue;
@@ -16,19 +18,27 @@ const SearchBar = (props) => {
     barValue: yup
       .string()
       .required("This field can't be empty")
-      .min(4, ({ min }) => `ICAO code must have at least ${min} characters`)
+      .min(3, ({ min }) => `ICAO code must have at least ${min} characters`)
       .max(4, ({ max }) => `ICAO code must have a maximum of ${max} characters`)
   });
 
 
-  const handlePress = () => {
+  const handlePress = async () => {
     // Validate input
     inputValidationSchema
       .validate({ barValue })
-      .then(() => {
+      .then(async () => {
         // If validated, redirect to results page
-        const ICAO = barValue.toUpperCase();
-        props.navigation.navigate("Weather", { airport: ICAO });
+        if (barValue.length === 3) {
+          const IATA = barValue.toUpperCase();
+          const id = await fetchOpenAipAirportIdByIATA(IATA);
+          const airportData = await fetchOpenAipAirportData(id);
+          const ICAO = airportData.icaoCode;
+          props.navigation.navigate("Weather", { airport: ICAO });
+        } else if (barValue.length === 4) {
+          const ICAO = barValue.toUpperCase();
+          props.navigation.navigate("Weather", { airport: ICAO });
+        }
       })
       .catch((error) => {
         setError(error.message);
@@ -40,7 +50,7 @@ const SearchBar = (props) => {
   return (
     <>
       <Input
-        placeholder='Airport ICAO code'
+        placeholder='Write airport ICAO or IATA'
         placeholderTextColor={theme.colors.paragraphText}
         onChangeText={setBarValue}
         rightIcon={{
