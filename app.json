@@ -19,7 +19,7 @@
     },
     "android": {
       "package": "com.therodri2.Briefing",
-      "versionCode": 2,
+      "versionCode": 3,
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon1024.png",
         "backgroundColor": "#ffffff"
