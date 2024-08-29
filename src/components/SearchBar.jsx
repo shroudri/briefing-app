@@ -50,7 +50,7 @@ const SearchBar = (props) => {
   return (
     <>
       <Input
-        placeholder='Write airport ICAO or IATA'
+        placeholder='Write airport ICAO'
         placeholderTextColor={theme.colors.paragraphText}
         onChangeText={setBarValue}
         rightIcon={{
