@@ -82,9 +82,9 @@ const HomeScreen = ({ navigation }) => {
 
         {favAirportsContext.favAirports.length === 0 && <Text style={{ textAlign: 'center', color: theme.colors.paragraphText }}>No favorites yet</Text>}
         {favAirportsContext.favAirports.length > 0 && matchingAirports.length === 0 && <Text style={{ textAlign: 'center', color: theme.colors.paragraphText }}>No matching airports found within your favorites</Text>}
-        {favAirportsContext.favAirports.length > 0 && matchingAirports.length === 0 && <><Text style={{ textAlign: 'center', color: theme.colors.paragraphText }}>Tap 🔍 to search</Text>
-        </>
-        }
+
+        {/* Show quick card if no matching airports found within favs */}
+        {favAirportsContext.favAirports.length > 0 && matchingAirports.length === 0 && barValue.length === 4 && <><AirportQuickCard key={barValue.toUpperCase()} airport={barValue.toUpperCase()} refresh={lastUpdate} naviagation={navigation} /></>}
       </ScrollView>
 
       {favAirportsContext.favAirports.length > 0 && <ButtonDeleteFavAirports setFavAirportList={favAirportsContext.setFavAirports} />}

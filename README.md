@@ -1,8 +1,7 @@
 # Briefing-app
 
 ## TODOs:
-- Allow search by IATA code or airport name
-- If no airport found within favs, show AirportQuickView with that one airport
+- Filter favs when typing IATA on searchbar
 - Show crosswind and headwind components
 - Cache last metars on a new context, so that, without connection, cached metar is used. This context may also store last update time to be shown
 
