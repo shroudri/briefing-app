@@ -1,5 +1,5 @@
 import { Input } from '@rneui/themed';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { StyleSheet } from 'react-native';
 import * as yup from 'yup';
 import { ThemeContext } from '../contexts/ThemeContext';
@@ -22,6 +22,10 @@ const SearchBar = (props) => {
       .max(4, ({ max }) => `ICAO code must have a maximum of ${max} characters`)
   });
 
+  useEffect(() => {       // Reset error message when initializing screen or barValue changes
+    setError('');
+    setContainerHeight(45);
+  }, [barValue]);
 
   const handlePress = async () => {
     // Validate input
