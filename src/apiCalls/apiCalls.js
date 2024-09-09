@@ -81,7 +81,8 @@ export async function fetchOpenAipAirportIdByIATA(iataCode) {
     url: 'https://api.core.openaip.net/api/airports',
     params: {
       'fields': '_id',
-      'search': iataCode
+      'search': iataCode,
+      'type': 3             // International airport
     },
     headers: {
       'accept': 'application/json',
