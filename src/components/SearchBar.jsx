@@ -61,6 +61,7 @@ const SearchBar = (props) => {
           type: 'material-icons',
           name: 'search',
           color: theme.colors.paragraphText,
+          size: 30,
           onPress: handlePress
         }}
         validationSchema={inputValidationSchema}
