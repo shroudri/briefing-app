@@ -8,7 +8,7 @@ export async function fetchMetars(airport, hours) {
   const response = await fetch(url);
   const data = await response.json();
   // console.log(data);
-  console.log("METARs received for: " + airport);
+  console.log("Receivd METARs for: " + airport);
   return data;
 }
 
@@ -17,7 +17,7 @@ export async function fetchTaf(airport) {
   const url = `https://aviationweather.gov/api/data/taf?ids=${airport}&format=json`
   const response = await fetch(url);
   const data = await response.json();
-  console.log("TAF received for: " + airport);
+  console.log("Received TAF for: " + airport);
   // console.log(data);
   return data;
 }
@@ -44,8 +44,7 @@ export async function fetchNotams(airport) {
   console.log("Fetching NOTAMs for: " + airport);
   try {
     const notams = await response.data
-    console.log("NOTAMs received for: " + airport);
-    console.log(notams)
+    console.log("Received NOTAMs for: " + airport);
     return notams
   } catch (error) {
     console.log(error)
@@ -57,7 +56,6 @@ export async function fetchIcaoFromIata(iataCode) {
     method: 'get',
     url: `https://hexdb.io/api/v1/airport/iata/${iataCode}`,
   })
-  console.log("Querying airport id for: " + iataCode)
   try {
     const data = await response.data
     const icaoCode = await data.icao
@@ -80,7 +78,6 @@ export async function fetchOpenAipAirportId(icaoCode) {
       'x-openaip-client-id': openAipClientId
     }
   })
-  console.log("Querying airport id for: " + icaoCode)
   try {
     const data = await response.data
     const airportId = await data.items[0]._id
@@ -109,7 +106,7 @@ export async function fetchOpenAipAirportData(airportId) {
   try {
     const airportData = await response.data
     //const iataCode = await airportData.iataCode
-    console.log("Returned airport data for ID " + airportId)
+    console.log("Received data of: " + airportId)
     return airportData
   } catch (error) {
     console.log(error)
