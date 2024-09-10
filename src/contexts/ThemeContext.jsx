@@ -26,7 +26,9 @@ export function ThemeContextProvider({ children }) {
             sliderMaximumTrackTintColor: isDarkPreferred ? "#C9C9C9" : "#ADADAD",
             airportMenuBackground: isDarkPreferred ? "#0E0E0E" : "#f7f7f7",
             airportMenuBorderColor: isDarkPreferred ? "grey" : "#6e6e6e",
-            airportMenuIcons: isDarkPreferred ? "#f0f0f0" : "#0062ff"
+            airportMenuIcons: isDarkPreferred ? "#f0f0f0" : "#0062ff",
+            airportInformationRunwayBackgroundColor: isDarkPreferred ? "#404040" : "#c7c9c9",
+            airportInformationRunwayTextColor: isDarkPreferred ? "#e3e3e3" : "black"
         },
         text: {
             contentTitle: {

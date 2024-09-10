@@ -29,9 +29,14 @@ export default function AirportInformationRunways({ data }) {
         flag: {
             alignSelf: 'center',
             marginLeft: 5
-        }, cells: {
+        }, runway: {
+            flex: 1,
             flexDirection: 'row',
-            flexWrap: 'wrap',
+            backgroundColor: theme.colors.airportInformationRunwayBackgroundColor,
+            margin: 3,
+            padding: 2,
+            justifyContent: 'space-between',
+            alignItems: 'center',
         }
     })
 
@@ -41,11 +46,11 @@ export default function AirportInformationRunways({ data }) {
             <View>
 
                 {data.runways.map((runway) => (
-                    <View key={runway.designator}>
+                    <View key={runway.designator} style={privStyles.runway}>
                         <Text style={privStyles.subtitle}>{runway.designator}</Text>
 
-                        <Text style={privStyles.paragraph}>Length: {runway.dimension.length.value} m</Text>
-                        <Text style={privStyles.paragraph}>True heading: {runway.trueHeading}º</Text>
+                        <Text style={privStyles.paragraph}>{runway.dimension.length.value}x{runway.dimension.width.value} m</Text>
+                        <Text style={privStyles.paragraph}>{runway.trueHeading.toString().padStart(3, '0')}º</Text>
                     </View>
                 ))}
             </View>
