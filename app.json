@@ -2,7 +2,7 @@
   "expo": {
     "name": "Briefing Toolkit",
     "slug": "Briefing",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "orientation": "portrait",
     "icon": "./assets/icon512.png",
     "userInterfaceStyle": "light",
@@ -19,7 +19,7 @@
     },
     "android": {
       "package": "com.therodri2.Briefing",
-      "versionCode": 5,
+      "versionCode": 6,
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon1024.png",
         "backgroundColor": "#ffffff"

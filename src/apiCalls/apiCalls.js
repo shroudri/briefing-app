@@ -75,7 +75,7 @@ export async function fetchOpenAipAirportId(icaoCode) {
     },
     headers: {
       'accept': 'application/json',
-      'x-openaip-client-id': openAipClientId
+      'x-openaip-api-key': openAipClientId
     }
   })
   try {
@@ -100,7 +100,7 @@ export async function fetchOpenAipAirportData(airportId) {
     url: url,
     headers: {
       'accept': 'application/json',
-      'x-openaip-client-id': openAipClientId
+      'x-openaip-api-key': openAipClientId
     }
   })
   try {
