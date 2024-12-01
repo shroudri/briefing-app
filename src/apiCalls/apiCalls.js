@@ -45,7 +45,10 @@ export async function fetchNotams(airport) {
   try {
     const notams = await response.data
     console.log("Received NOTAMs for: " + airport);
-    return notams
+
+    let orderedNotams = notams.sort((a, b) => a.notamNumber.localeCompare(b.notamNumber))
+    //console.log(notams)
+    return orderedNotams
   } catch (error) {
     console.log(error)
   }
