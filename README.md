@@ -1,8 +1,6 @@
 # Briefing-app
 
 ## TODOs:
-- NOTAMs: Change source to dins (defense internet notam system).
-- NOTAMs: Order by warnings (first) then RPAs last. Can be done through the notam identification code letter.
 - When, on settings screen page:
     - Change settings button behaviour to return to home page
     - Change settings icon to show a home page
