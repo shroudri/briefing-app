@@ -9,12 +9,14 @@ import NotamQuickCard from './NotamQuickCard';
 export default function ItemNotams(props) {
     const UserSettings = useContext(SettingsContext);
     const [notams, setNotams] = useState(null);
+    const [rpas, setRpas] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const theme = useContext(ThemeContext);
 
     const getData = async () => {
         await fetchNotams(props.airport).then((data) => {
-            setNotams(data);
+            setNotams(data[0]);
+            setRpas(data[1]);
             setIsLoading(false);
         })
     }
@@ -47,6 +49,13 @@ export default function ItemNotams(props) {
             {isLoading && <Text style={{ color: theme.colors.paragraphText }}>Loading...</Text>}
             {notams && (
                 notams.map((item) => (
+                    <View key={item.notamNumber}>
+                        <NotamQuickCard notam={item} />
+                    </View>
+                ))
+            )}
+            {rpas && (
+                rpas.map((item) => (
                     <View key={item.notamNumber}>
                         <NotamQuickCard notam={item} />
                     </View>

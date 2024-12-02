@@ -31,6 +31,9 @@ export async function fetchNotams(airport) {
     sort: "EFFECTIVE_DATE"  // CREATION_DATE, EFFECTIVE_DATE
   };
 
+  let adNotams = [];
+  let rpas = [];
+
   const response = await axios({
     method: 'post',
     url: 'https://notams.aim.faa.gov/notamSearch/search',
@@ -43,12 +46,22 @@ export async function fetchNotams(airport) {
   })
   console.log("Fetching NOTAMs for: " + airport);
   try {
-    const notams = await response.data
+    const fetchedNotams = await response.data
     console.log("Received NOTAMs for: " + airport);
 
-    let orderedNotams = notams.sort((a, b) => a.notamNumber.localeCompare(b.notamNumber))
-    //console.log(notams)
-    return orderedNotams
+    // Separate Advisories and Warnings from RPAs
+    for (let i = 0; i < fetchedNotams.length; i++) {
+      if (fetchedNotams[i].notamNumber.startsWith("R")) {
+        rpas.push(fetchedNotams[i])
+      } else {
+        adNotams.push(fetchedNotams[i])
+      }
+    }
+
+    // Order Advisories and Notams by issue date
+    let orderedAdNotams = adNotams.sort((a, b) => b.issueDate.localeCompare(a.issueDate))
+
+    return [orderedAdNotams, rpas]
   } catch (error) {
     console.log(error)
   }
