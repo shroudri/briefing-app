@@ -4,6 +4,14 @@
 - When, on settings screen page:
     - Change settings button behaviour to return to home page
     - Change settings icon to show a home page
+- When returning to home page, clear search bar text
+
+- Fav airports
+    - Order (drag and drop, alphabetically, etc)
+    - Ability to delete one by one
+
+- Move "Delete all favorites" to settings page
+
 
 - Filter favs when typing IATA on searchbar
 - Show crosswind and headwind components
